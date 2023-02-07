@@ -1,4 +1,3 @@
-import bulbasaur from "../assets/bulbasaur.png"
 import * as Dialog from "@radix-ui/react-dialog"
 import { useState } from "react"
 import InfoModal from "./InfoModal"
