@@ -5,8 +5,6 @@ import AddModal from "./AddModal"
 const Menu = () => {
   const [open, setOpen] = useState(false)
 
-  console.log(open)
-
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <div className="mb-5 bg-white/75 rounded-lg py-5 px-3 shadow-lg shadow-black/15 flex justify-between">
