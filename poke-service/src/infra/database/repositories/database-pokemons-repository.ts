@@ -6,19 +6,36 @@ import { DatabaseService } from '../database.service';
 @Injectable()
 export class DatabasePokemonsRepository implements PokemonRepository {
   private pool;
+  private client;
 
   constructor(private databaseService: DatabaseService) {
     this.pool = this.databaseService.getPool();
   }
 
   async create(pokemon: Pokemon): Promise<void> {
+    const query = {
+      text: `INSERT INTO pokemon(id, name, type, gender, weight, createdAt)
+      VALUES (
+        '${pokemon.id}',
+        '${pokemon.name}',
+        '${pokemon.type}',
+        '${pokemon.gender}',
+        '${pokemon.weight.value}',
+        '${pokemon.createdAt.toISOString()}'
+      )
+      `,
+    };
+
     try {
-      const client = this.pool.connect();
-      const query = {
-        text: ``,
-      };
+      this.client = await this.pool.connect();
+
+      await this.client.query(query);
+
+      console.log('Pokemon created!');
     } catch (error) {
-      console.log('Create pokemon error!\nError:', error);
+      console.log('Create pokemon error!\n', error);
+    } finally {
+      this.client.release();
     }
   }
 }
