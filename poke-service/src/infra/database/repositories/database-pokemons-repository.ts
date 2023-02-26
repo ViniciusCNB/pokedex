@@ -1,6 +1,6 @@
+import { Pokemon } from '@app/entities/pokemon';
+import { PokemonRepository } from '@app/repositories/pokemon-repository';
 import { Injectable } from '@nestjs/common';
-import { Pokemon } from '../../../app/entities/pokemon';
-import { PokemonRepository } from '../../../app/repositories/pokemon-repository';
 import { DatabaseService } from '../database.service';
 
 @Injectable()

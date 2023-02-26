@@ -1,5 +1,5 @@
+import { PokemonRepository } from '@app/repositories/pokemon-repository';
 import { Module } from '@nestjs/common';
-import { PokemonRepository } from 'src/app/repositories/pokemon-repository';
 import { DatabaseService } from './database.service';
 import { DatabasePokemonsRepository } from './repositories/database-pokemons-repository';
 

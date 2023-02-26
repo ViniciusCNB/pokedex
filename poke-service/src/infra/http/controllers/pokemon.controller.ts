@@ -1,5 +1,5 @@
+import { CreatePokemon } from '@app/use-cases/create-pokemon';
 import { Body, Controller, Post } from '@nestjs/common';
-import { CreatePokemon } from 'src/app/use-cases/create-pokemon';
 import { CreatePokemonBody } from '../dtos/create-pokemon-body';
 
 @Controller('pokemon')

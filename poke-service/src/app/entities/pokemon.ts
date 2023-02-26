@@ -1,5 +1,5 @@
+import { Replace } from '@helpers/Replace';
 import { randomUUID } from 'node:crypto';
-import { Replace } from 'src/helpers/Replace';
 import { Weight } from './weight';
 
 export interface PokemonProps {

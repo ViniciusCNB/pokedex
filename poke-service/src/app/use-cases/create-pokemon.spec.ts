@@ -1,4 +1,4 @@
-import { InMemoryPokemonsRepository } from '../../../test/repositories/in-memory-pokemons-repository';
+import { InMemoryPokemonsRepository } from '@test/repositories/in-memory-pokemons-repository';
 import { Pokemon } from '../entities/pokemon';
 import { CreatePokemon } from './create-pokemon';
 

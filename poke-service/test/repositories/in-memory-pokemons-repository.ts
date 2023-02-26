@@ -1,5 +1,5 @@
-import { Pokemon } from '../../src/app/entities/pokemon';
-import { PokemonRepository } from '../../src/app/repositories/pokemon-repository';
+import { Pokemon } from '@app/entities/pokemon';
+import { PokemonRepository } from '@app/repositories/pokemon-repository';
 
 export class InMemoryPokemonsRepository implements PokemonRepository {
   public pokemons: Pokemon[] = [];
