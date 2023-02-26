@@ -2,6 +2,7 @@ import { Pokemon } from '@app/entities/pokemon';
 import { PokemonRepository } from '@app/repositories/pokemon-repository';
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from '../database.service';
+import { DatabasePokemonMapper } from '../mappers/database-pokemon-mapper';
 
 @Injectable()
 export class DatabasePokemonsRepository implements PokemonRepository {
@@ -14,16 +15,7 @@ export class DatabasePokemonsRepository implements PokemonRepository {
 
   async create(pokemon: Pokemon): Promise<void> {
     const query = {
-      text: `INSERT INTO pokemon(id, name, type, gender, weight, createdAt)
-      VALUES (
-        '${pokemon.id}',
-        '${pokemon.name}',
-        '${pokemon.type}',
-        '${pokemon.gender}',
-        '${pokemon.weight.value}',
-        '${pokemon.createdAt.toISOString()}'
-      )
-      `,
+      text: DatabasePokemonMapper.toCreate(pokemon),
     };
 
     try {
