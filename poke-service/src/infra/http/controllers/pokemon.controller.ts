@@ -1,6 +1,7 @@
 import { CreatePokemon } from '@app/use-cases/create-pokemon';
 import { Body, Controller, Post } from '@nestjs/common';
 import { CreatePokemonBody } from '../dtos/create-pokemon-body';
+import { PokemonViewModel } from '../view-models/pokemon-view-model';
 
 @Controller('pokemon')
 export class PokemonsController {
@@ -17,6 +18,6 @@ export class PokemonsController {
       weight,
     });
 
-    return { pokemon };
+    return PokemonViewModel.toCreate(pokemon);
   }
 }
