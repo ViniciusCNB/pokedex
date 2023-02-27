@@ -30,4 +30,23 @@ export class DatabasePokemonsRepository implements PokemonRepository {
       this.client.release();
     }
   }
+
+  async findAll(): Promise<Pokemon[]> {
+    const query = {
+      text: '',
+    };
+
+    try {
+      this.client = await this.pool.connect();
+
+      const response = await this.client.query(query);
+
+      console.log('Find all pokemons!');
+      return response;
+    } catch (error) {
+      console.log('Find all pokemons error!\n', error);
+    } finally {
+      this.client.release();
+    }
+  }
 }

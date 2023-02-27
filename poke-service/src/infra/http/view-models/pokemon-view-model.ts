@@ -9,4 +9,11 @@ export class PokemonViewModel {
       createdAt: pokemon.createdAt,
     };
   }
+
+  static toFindAll(pokemon: Pokemon[]) {
+    return {
+      pokemon,
+      count: pokemon.length,
+    };
+  }
 }
