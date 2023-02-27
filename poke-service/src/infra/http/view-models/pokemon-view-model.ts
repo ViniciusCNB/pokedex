@@ -4,6 +4,7 @@ export class PokemonViewModel {
   static toCreate(pokemon: Pokemon) {
     return {
       id: pokemon.id,
+      imageURL: pokemon.imageURL,
       name: pokemon.name,
       createdAt: pokemon.createdAt,
     };

@@ -13,11 +13,12 @@ class CreateTables {
     this.tables.push({
       text: `CREATE TABLE IF NOT EXISTS pokemon (
         id NUMERIC PRIMARY KEY,
+        imageURL VARCHAR(255) NOT NULL,
         name VARCHAR(255) NOT NULL,
         type VARCHAR(255) NOT NULL,
         gender VARCHAR(255) NOT NULL,
         weight NUMERIC NOT NULL,
-        createdAt TIMESTAMP
+        createdAt TIMESTAMP NOT NULL
       );`,
     });
 

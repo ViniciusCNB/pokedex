@@ -3,6 +3,7 @@ import { Weight } from './weight';
 
 export interface PokemonProps {
   id: number;
+  imageURL: string;
   name: string;
   type: string;
   gender: string;
@@ -26,6 +27,14 @@ export class Pokemon {
 
   public get id() {
     return this.props.id;
+  }
+
+  public set imageURL(imageURL: string) {
+    this.props.imageURL = imageURL;
+  }
+
+  public get imageURL() {
+    return this.props.imageURL;
   }
 
   public set name(name: string) {

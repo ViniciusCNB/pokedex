@@ -9,10 +9,11 @@ export class PokemonsController {
 
   @Post('create')
   async create(@Body() body: CreatePokemonBody) {
-    const { id, name, type, gender, weight } = body;
+    const { id, imageURL, name, type, gender, weight } = body;
 
     const { pokemon } = await this.createPokemon.execute({
       id,
+      imageURL,
       name,
       type,
       gender,

@@ -5,6 +5,9 @@ export class CreatePokemonBody {
   id: number;
 
   @IsNotEmpty()
+  imageURL: string;
+
+  @IsNotEmpty()
   name: string;
 
   @IsNotEmpty()

@@ -9,6 +9,7 @@ interface CreatePokemonResponse {
 
 interface CreatePokemonRequest {
   id: number;
+  imageURL: string;
   name: string;
   type: string;
   gender: string;
@@ -20,10 +21,11 @@ export class CreatePokemon {
   constructor(private pokemonRepository: PokemonRepository) {}
 
   async execute(request: CreatePokemonRequest): Promise<CreatePokemonResponse> {
-    const { id, name, type, gender, weight } = request;
+    const { id, imageURL, name, type, gender, weight } = request;
 
     const pokemon = new Pokemon({
       id,
+      imageURL,
       name,
       type,
       gender,

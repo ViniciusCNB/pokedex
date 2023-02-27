@@ -13,6 +13,9 @@ describe('Local', () => {
         'A quiet town where many trainers start their journey.',
       ),
       localPokemon: new Pokemon({
+        id: 1,
+        imageURL:
+          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png',
         name: 'Charmander',
         type: 'Fire',
         gender: 'Male',
@@ -59,6 +62,9 @@ describe('Local', () => {
 
   it('should be able to set a new local pokemon', () => {
     const newPokemon = new Pokemon({
+      id: 1,
+      imageURL:
+        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png',
       name: 'Squirtle',
       type: 'Water',
       gender: 'Male',
