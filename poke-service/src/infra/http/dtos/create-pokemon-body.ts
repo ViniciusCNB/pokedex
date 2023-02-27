@@ -2,6 +2,9 @@ import { IsNotEmpty } from 'class-validator';
 
 export class CreatePokemonBody {
   @IsNotEmpty()
+  id: number;
+
+  @IsNotEmpty()
   name: string;
 
   @IsNotEmpty()

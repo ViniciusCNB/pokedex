@@ -12,7 +12,7 @@ class CreateTables {
     //Pokemon Table
     this.tables.push({
       text: `CREATE TABLE IF NOT EXISTS pokemon (
-        id UUID PRIMARY KEY,
+        id NUMERIC PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         type VARCHAR(255) NOT NULL,
         gender VARCHAR(255) NOT NULL,
