@@ -7,4 +7,8 @@ export class InMemoryPokemonsRepository implements PokemonRepository {
   async create(pokemon: Pokemon) {
     this.pokemons.push(pokemon);
   }
+
+  async findAll(): Promise<Pokemon[]> {
+    return this.pokemons;
+  }
 }

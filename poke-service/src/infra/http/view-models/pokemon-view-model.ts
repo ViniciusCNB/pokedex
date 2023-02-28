@@ -12,8 +12,8 @@ export class PokemonViewModel {
 
   static toFindAll(pokemon: Pokemon[]) {
     return {
-      pokemon,
-      count: pokemon.length,
+      pokemons: pokemon['rows'],
+      count: pokemon['rowCount'],
     };
   }
 }

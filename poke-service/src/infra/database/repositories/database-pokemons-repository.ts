@@ -33,7 +33,7 @@ export class DatabasePokemonsRepository implements PokemonRepository {
 
   async findAll(): Promise<Pokemon[]> {
     const query = {
-      text: '',
+      text: DatabasePokemonMapper.toFindAll(),
     };
 
     try {

@@ -14,4 +14,8 @@ export class DatabasePokemonMapper {
     )
     `;
   }
+
+  static toFindAll() {
+    return `SELECT * FROM pokemon;`;
+  }
 }
