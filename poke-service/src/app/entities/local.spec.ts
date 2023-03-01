@@ -1,7 +1,5 @@
 import { Description } from './description';
 import { Local } from './local';
-import { Pokemon } from './pokemon';
-import { Weight } from './weight';
 
 describe('Local', () => {
   let local: Local;
@@ -12,15 +10,6 @@ describe('Local', () => {
       description: new Description(
         'A quiet town where many trainers start their journey.',
       ),
-      localPokemon: new Pokemon({
-        id: 1,
-        imageURL:
-          'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png',
-        name: 'Charmander',
-        type: 'Fire',
-        gender: 'Male',
-        weight: new Weight(46),
-      }),
     });
   });
 
@@ -49,33 +38,5 @@ describe('Local', () => {
     local.description = newDescription;
     expect(local.description).toBeInstanceOf(Description);
     expect(local.description.value).toEqual('A bustling city.');
-  });
-
-  it('should have a local pokemon', () => {
-    expect(local.localPokemon).toBeInstanceOf(Pokemon);
-    expect(local.localPokemon.name).toEqual('Charmander');
-    expect(local.localPokemon.type).toEqual('Fire');
-    expect(local.localPokemon.gender).toEqual('Male');
-    expect(local.localPokemon.weight).toBeInstanceOf(Weight);
-    expect(local.localPokemon.weight.value).toEqual(46);
-  });
-
-  it('should be able to set a new local pokemon', () => {
-    const newPokemon = new Pokemon({
-      id: 1,
-      imageURL:
-        'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png',
-      name: 'Squirtle',
-      type: 'Water',
-      gender: 'Male',
-      weight: new Weight(44),
-    });
-    local.localPokemon = newPokemon;
-    expect(local.localPokemon).toBeInstanceOf(Pokemon);
-    expect(local.localPokemon.name).toEqual('Squirtle');
-    expect(local.localPokemon.type).toEqual('Water');
-    expect(local.localPokemon.gender).toEqual('Male');
-    expect(local.localPokemon.weight).toBeInstanceOf(Weight);
-    expect(local.localPokemon.weight.value).toEqual(44);
   });
 });

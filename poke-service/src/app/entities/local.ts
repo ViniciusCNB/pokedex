@@ -1,17 +1,22 @@
+import { randomUUID } from 'node:crypto';
 import { Description } from './description';
-import { Pokemon } from './pokemon';
 
 export interface LocalProps {
   name: string;
   description: Description;
-  localPokemon: Pokemon;
 }
 
 export class Local {
   private props: LocalProps;
+  private _id: string;
 
   constructor(props: LocalProps) {
+    this._id = randomUUID();
     this.props = props;
+  }
+
+  public get id(): string {
+    return this._id;
   }
 
   public set name(name: string) {
@@ -28,13 +33,5 @@ export class Local {
 
   public get description(): Description {
     return this.props.description;
-  }
-
-  public set localPokemon(localPokemon: Pokemon) {
-    this.props.localPokemon = localPokemon;
-  }
-
-  public get localPokemon(): Pokemon {
-    return this.props.localPokemon;
   }
 }
