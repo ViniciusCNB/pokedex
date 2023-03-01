@@ -2,9 +2,10 @@ import { Pokemon } from '@app/entities/pokemon';
 
 export class DatabasePokemonMapper {
   static toCreate(pokemon: Pokemon) {
-    return `INSERT INTO pokemon(id, imageURL, name, type, gender, weight, createdAt)
+    return `INSERT INTO Pokemon(id, localId, imageURL, name, type, gender, weight, createdAt)
     VALUES (
       '${pokemon.id}',
+      '${pokemon.localId}',
       '${pokemon.imageURL}',
       '${pokemon.name}',
       '${pokemon.type}',
@@ -16,6 +17,6 @@ export class DatabasePokemonMapper {
   }
 
   static toFindAll() {
-    return `SELECT * FROM pokemon;`;
+    return `SELECT * FROM Pokemon;`;
   }
 }

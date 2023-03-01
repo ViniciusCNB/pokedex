@@ -3,7 +3,7 @@ import { Weight } from './weight';
 
 export interface PokemonProps {
   id: number;
-  localId: number;
+  localId: string;
   imageURL: string;
   name: string;
   type: string;
@@ -30,7 +30,7 @@ export class Pokemon {
     return this.props.id;
   }
 
-  public set localId(localId: number) {
+  public set localId(localId: string) {
     this.props.localId = localId;
   }
 

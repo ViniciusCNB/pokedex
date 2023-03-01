@@ -9,6 +9,7 @@ describe('CreatePokemon', () => {
     const createPokemon = new CreatePokemon(pokemonsRepository);
     const request = {
       id: 1,
+      localId: '154353',
       imageURL:
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png',
       name: 'Pikachu',

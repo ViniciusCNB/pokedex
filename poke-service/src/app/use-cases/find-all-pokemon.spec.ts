@@ -10,6 +10,7 @@ describe('FindAllPokemon', () => {
 
     const pokemon1 = {
       id: 1,
+      localId: '2344234',
       imageURL: 'teste@image.com',
       name: 'Pikachu',
       type: 'Electric',
@@ -19,6 +20,7 @@ describe('FindAllPokemon', () => {
 
     const pokemon2 = {
       id: 2,
+      localId: '2344234',
       imageURL: 'teste@image.com',
       name: 'Charmander',
       type: 'Fire',
