@@ -5,8 +5,8 @@ export class Age {
     return this.age;
   }
 
-  private validateAgeValue(age: number) {
-    return age >= 1 || age <= 100;
+  private validateAgeValue(age: number): boolean {
+    return age >= 1 && age <= 100;
   }
 
   constructor(age: number) {
