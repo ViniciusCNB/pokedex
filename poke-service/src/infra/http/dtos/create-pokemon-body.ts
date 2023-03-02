@@ -1,10 +1,12 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsUUID } from 'class-validator';
 
 export class CreatePokemonBody {
   @IsNotEmpty()
-  id: number;
+  @IsUUID()
+  trainerId: string;
 
   @IsNotEmpty()
+  @IsUUID()
   localId: string;
 
   @IsNotEmpty()
@@ -12,6 +14,9 @@ export class CreatePokemonBody {
 
   @IsNotEmpty()
   name: string;
+
+  @IsNotEmpty()
+  nickname: string;
 
   @IsNotEmpty()
   type: string;

@@ -8,11 +8,12 @@ describe('CreatePokemon', () => {
 
     const createPokemon = new CreatePokemon(pokemonsRepository);
     const request = {
-      id: 1,
+      trainerId: '423423',
       localId: '154353',
       imageURL:
         'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png',
       name: 'Pikachu',
+      nickname: 'Zezim',
       type: 'Electric',
       gender: 'Male',
       weight: 60,

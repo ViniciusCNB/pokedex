@@ -13,25 +13,51 @@ export class PokemonsController {
 
   @Post('create')
   async create(@Body() body: CreatePokemonBody) {
-    const { id, localId, imageURL, name, type, gender, weight } = body;
-
-    const { pokemon } = await this.createPokemon.execute({
-      id,
+    const {
+      trainerId,
       localId,
       imageURL,
       name,
+      nickname,
       type,
       gender,
       weight,
-    });
+    } = body;
 
-    return PokemonViewModel.toCreate(pokemon);
+    try {
+      const { pokemon } = await this.createPokemon.execute({
+        trainerId,
+        localId,
+        imageURL,
+        name,
+        nickname,
+        type,
+        gender,
+        weight,
+      });
+
+      return PokemonViewModel.toCreate(pokemon);
+    } catch (error) {
+      return {
+        title: 'Error',
+        message: 'Created pokemon error!',
+        error: error,
+      };
+    }
   }
 
   @Get('find-all')
   async findAll() {
-    const { pokemon } = await this.findAllPokemon.execute();
+    try {
+      const { pokemon } = await this.findAllPokemon.execute();
 
-    return PokemonViewModel.toFindAll(pokemon);
+      return PokemonViewModel.toFindAll(pokemon);
+    } catch (error) {
+      return {
+        title: 'Error',
+        message: 'Find all pokemons error!',
+        error: error,
+      };
+    }
   }
 }

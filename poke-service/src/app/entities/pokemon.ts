@@ -1,11 +1,13 @@
 import { Replace } from '@helpers/Replace';
+import { randomUUID } from 'node:crypto';
 import { Weight } from './weight';
 
 export interface PokemonProps {
-  id: number;
+  trainerId: string;
   localId: string;
   imageURL: string;
   name: string;
+  nickname: string;
   type: string;
   gender: string;
   weight: Weight;
@@ -14,20 +16,26 @@ export interface PokemonProps {
 
 export class Pokemon {
   private props: PokemonProps;
+  private _id;
 
   constructor(props: Replace<PokemonProps, { createdAt?: Date }>) {
     this.props = {
       ...props,
       createdAt: props.createdAt ?? new Date(),
     };
-  }
-
-  public set id(id: number) {
-    this.props.id = id;
+    this._id = randomUUID();
   }
 
   public get id() {
-    return this.props.id;
+    return this._id;
+  }
+
+  public set trainerId(trainerId: string) {
+    this.props.trainerId = trainerId;
+  }
+
+  public get trainerId() {
+    return this.props.trainerId;
   }
 
   public set localId(localId: string) {
@@ -52,6 +60,14 @@ export class Pokemon {
 
   public get name(): string {
     return this.props.name;
+  }
+
+  public set nickname(nickname: string) {
+    this.props.nickname = nickname;
+  }
+
+  public get nickname(): string {
+    return this.props.nickname;
   }
 
   public set type(type: string) {

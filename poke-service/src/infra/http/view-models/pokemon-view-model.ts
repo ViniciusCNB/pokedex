@@ -5,8 +5,8 @@ export class PokemonViewModel {
     return {
       id: pokemon.id,
       imageURL: pokemon.imageURL,
+      nickname: pokemon.nickname,
       name: pokemon.name,
-      createdAt: pokemon.createdAt,
     };
   }
 

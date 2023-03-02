@@ -9,20 +9,22 @@ describe('FindAllPokemon', () => {
     const findAllPokemon = new FindAllPokemon(pokemonsRepository);
 
     const pokemon1 = {
-      id: 1,
+      trainerId: '65723',
       localId: '2344234',
       imageURL: 'teste@image.com',
       name: 'Pikachu',
+      nickname: 'Boy',
       type: 'Electric',
       gender: 'Male',
       weight: 32,
     };
 
     const pokemon2 = {
-      id: 2,
+      trainerId: '879',
       localId: '2344234',
       imageURL: 'teste@image.com',
       name: 'Charmander',
+      nickname: 'Tobias',
       type: 'Fire',
       gender: 'Female',
       weight: 55,

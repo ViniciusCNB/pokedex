@@ -8,10 +8,11 @@ interface CreatePokemonResponse {
 }
 
 interface CreatePokemonRequest {
-  id: number;
+  trainerId: string;
   localId: string;
   imageURL: string;
   name: string;
+  nickname: string;
   type: string;
   gender: string;
   weight: number;
@@ -22,13 +23,23 @@ export class CreatePokemon {
   constructor(private pokemonRepository: PokemonRepository) {}
 
   async execute(request: CreatePokemonRequest): Promise<CreatePokemonResponse> {
-    const { id, localId, imageURL, name, type, gender, weight } = request;
-
-    const pokemon = new Pokemon({
-      id,
+    const {
+      trainerId,
       localId,
       imageURL,
       name,
+      nickname,
+      type,
+      gender,
+      weight,
+    } = request;
+
+    const pokemon = new Pokemon({
+      trainerId,
+      localId,
+      imageURL,
+      name,
+      nickname,
       type,
       gender,
       weight: new Weight(weight),
