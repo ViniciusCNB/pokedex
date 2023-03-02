@@ -12,9 +12,21 @@ class CreateTables {
     //Local table
     this.tables.push({
       text: `CREATE TABLE IF NOT EXISTS Local (
-        id INT PRIMARY KEY,
+        id UUID PRIMARY KEY,
         name VARCHAR(255) NOT NULL,
         description VARCHAR(255) NOT NULL
+      );
+      `,
+    });
+
+    //Trainer table
+    this.tables.push({
+      text: `CREATE TABLE IF NOT EXISTS Trainer (
+        id UUID PRIMARY KEY,
+        localId UUID NOT NULL,
+        name VARCHAR(255) NOT NULL,
+        age INT NOT NULL,
+        FOREIGN KEY (localId) REFERENCES Local(id)  
       );
       `,
     });
@@ -22,16 +34,39 @@ class CreateTables {
     //Pokemon Table
     this.tables.push({
       text: `CREATE TABLE IF NOT EXISTS Pokemon (
-        id INT PRIMARY KEY,
-        localId INT NOT NULL,
+        id UUID PRIMARY KEY,
+        trainerId UUID NOT NULL,
+        localId UUID NOT NULL,
         imageURL VARCHAR(255) NOT NULL,
         name VARCHAR(255) NOT NULL,
+        nickname VARCHAR(255) NOT NULL,
         type VARCHAR(255) NOT NULL,
         gender VARCHAR(255) NOT NULL,
         weight NUMERIC NOT NULL,
         createdAt TIMESTAMP NOT NULL,
-        FOREIGN KEY (localId) REFERENCES Local(id)  
+        FOREIGN KEY (localId) REFERENCES Local(id),  
+        FOREIGN KEY (trainerId) REFERENCES Trainer(id)  
       );`,
+    });
+
+    //Battle table
+    this.tables.push({
+      text: `CREATE TABLE IF NOT EXISTS Battle (
+        id UUID PRIMARY KEY,
+        localId UUID NOT NULL,
+        trainerId1 UUID NOT NULL,
+        trainerId2 UUID NOT NULL,
+        pokemonId1 UUID NOT NULL,
+        pokemonId2 UUID NOT NULL,
+        winnerId UUID NOT NULL,
+        FOREIGN KEY (localId) REFERENCES Local(id),  
+        FOREIGN KEY (trainerId1) REFERENCES Trainer(id),  
+        FOREIGN KEY (trainerId2) REFERENCES Trainer(id),  
+        FOREIGN KEY (pokemonId1) REFERENCES Pokemon(id),  
+        FOREIGN KEY (pokemonId2) REFERENCES Pokemon(id),  
+        FOREIGN KEY (winnerId) REFERENCES Trainer(id)  
+      );
+      `,
     });
 
     this.execute();
