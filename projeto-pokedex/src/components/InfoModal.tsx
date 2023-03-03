@@ -22,7 +22,6 @@ const InfoModal = (props: InfoModalProps) => {
       .then(response => setPokemon(response.data))
   }, [])
 
-  console.log(pokemon)
   return (
     <Dialog.Portal>
       <Dialog.Overlay className="bg-black/60 inset-0 fixed"/>
