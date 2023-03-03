@@ -2,7 +2,7 @@ import { Trainer } from '@app/entities/trainer';
 import { TrainerRepository } from '@app/repositories/trainer-repository';
 
 export class InMemoryTrainersRepository implements TrainerRepository {
-  public trainers: Trainer[];
+  public trainers: Trainer[] = [];
 
   async create(trainer: Trainer): Promise<void> {
     this.trainers.push(trainer);
