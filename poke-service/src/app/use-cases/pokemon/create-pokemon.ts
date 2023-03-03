@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Pokemon } from '../entities/pokemon';
-import { Weight } from '../entities/weight';
-import { PokemonRepository } from '../repositories/pokemon-repository';
+import { Pokemon } from '../../entities/pokemon';
+import { Weight } from '../../entities/weight';
+import { PokemonRepository } from '../../repositories/pokemon-repository';
 
 interface CreatePokemonResponse {
   pokemon: Pokemon;

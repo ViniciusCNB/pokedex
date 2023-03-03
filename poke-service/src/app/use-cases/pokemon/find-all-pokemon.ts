@@ -1,6 +1,6 @@
 import { Pokemon } from '@app/entities/pokemon';
 import { Injectable } from '@nestjs/common';
-import { PokemonRepository } from '../../app/repositories/pokemon-repository';
+import { PokemonRepository } from '../../../app/repositories/pokemon-repository';
 
 interface FindAllPokemonResponse {
   pokemon: Pokemon[];
