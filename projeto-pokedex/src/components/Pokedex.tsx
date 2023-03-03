@@ -4,7 +4,7 @@ import bulbasaur from "../assets/bulbasaur.png"
 import charmander from "../assets/charmander.png"
 import pikachu from "../assets/pikachu.png"
 import squirtle from "../assets/squirtle.png"
-import Menu from "./Menu"
+import PokedexMenu from "./PokedexMenu"
 import axios from "axios"
 
 interface Pokemon {
@@ -21,11 +21,10 @@ const Pokedex = () => {
       .then(response => setPokemons(response.data["results"]))
   }, [])
 
-  console.log(pokemons)
   return (
     <div className="bg-red-600 w-1/2 mx-auto h-4/6 my-7 rounded-[50px] py-12 shadow-md shadow-black/60">
       <div className="bg-slate-100 w-11/12 max-h-[550px] mx-auto p-5 overflow-auto rounded-lg scrollbar scrollbar-thin-rose-500">
-        <Menu />
+        <PokedexMenu />
         <div className="grid grid-cols-2 gap-4">
           {pokemons?.map(pokemon => {
             return (
