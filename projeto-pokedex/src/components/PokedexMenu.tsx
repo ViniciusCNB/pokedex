@@ -5,6 +5,11 @@ import AddPokeModal from "./AddPokeModal"
 import AddTrainerModal from "./AddTrainerModal"
 import { Menu, Button, MenuItem } from "@mui/material"
 
+interface PokedexMenuProps {
+  handleFilterText: (text: string) => void
+}
+
+const PokedexMenu = (props: PokedexMenuProps) => {
 
 const PokedexMenu = () => {
   const [open, setOpen] = useState(false)
@@ -19,8 +24,15 @@ const PokedexMenu = () => {
 
   return (
     <div className="mb-5 bg-white/75 rounded-lg py-5 px-3 shadow-lg shadow-black/15 flex justify-between">
-      <input placeholder="Pokémon's Name" type="text" className="bg-gray-200 rounded py-3 px-4" />
-        
+      <input
+        placeholder="Search Pokémon"
+        type="text"
+        className="bg-gray-200 rounded py-3 px-4"
+        onChange={(e) => {
+          props.handleFilterText(e.target.value)
+        }}
+      />
+
       <div>
         <Button
           id="basic-button"
