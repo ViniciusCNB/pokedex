@@ -1,7 +1,7 @@
-import { Description } from '@app/entities/description';
-import { Local } from '@app/entities/local';
-import { LocalRepository } from '@app/repositories/local-repository';
 import { Injectable } from '@nestjs/common';
+import { Description } from '../../../app/entities/description';
+import { Local } from '../../../app/entities/local';
+import { LocalRepository } from '../../../app/repositories/local-repository';
 
 interface CreateLocalResponse {
   local: Local;
