@@ -13,7 +13,37 @@ export class Battle {
   private props: BattleProps;
   private _id: string;
 
+  private validateTrainersValue(
+    trainerId1: string,
+    trainerId2: string,
+    winnerId: string,
+  ) {
+    return (
+      trainerId1 == trainerId2 ||
+      (winnerId != trainerId1 && winnerId != trainerId2)
+    );
+  }
+
+  private validatePokemonsValue(pokemonId1: string, pokemonId2: string) {
+    return pokemonId1 == pokemonId2;
+  }
+
   constructor(props: BattleProps) {
+    const isNotTrainersValueValid = this.validateTrainersValue(
+      props.trainerId1,
+      props.trainerId2,
+      props.winnerId,
+    );
+
+    const isNotPokemonsValueValid = this.validatePokemonsValue(
+      props.pokemonId1,
+      props.pokemonId2,
+    );
+
+    if (isNotTrainersValueValid || isNotPokemonsValueValid) {
+      throw new Error('Trainers or Pokemons value error!');
+    }
+
     this.props = props;
     this._id = randomUUID();
   }
