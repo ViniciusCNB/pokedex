@@ -1,6 +1,6 @@
-import { FindAllPokemon } from '@app/use-cases/find-all-pokemon';
+import { FindAllPokemon } from '@app/use-cases/pokemon/find-all-pokemon';
 import { Module } from '@nestjs/common';
-import { CreatePokemon } from 'src/app/use-cases/create-pokemon';
+import { CreatePokemon } from 'src/app/use-cases/pokemon/create-pokemon';
 import { DatabaseModule } from '../database/database.module';
 import { PokemonsController } from './controllers/pokemon.controller';
 
