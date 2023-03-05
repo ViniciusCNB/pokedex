@@ -3,7 +3,10 @@ import { useForm } from "react-hook-form"
 
 const AddTrainerModal = () => {
   const { register, handleSubmit } = useForm()
-  const onSubmit = (data: any) => console.log(data)
+  const onSubmit = (data: any) => {
+    console.log(data)
+    alert(`Trainer ${data["name"]} successfully created.`)
+  }
 
   return (
     <div>

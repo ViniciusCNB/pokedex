@@ -3,7 +3,10 @@ import { useForm } from "react-hook-form"
 
 const AddLocalModal = () => {
   const { register, handleSubmit } = useForm()
-  const onSubmit = (data: any) => console.log(data)
+  const onSubmit = (data: any) => {
+    console.log(data)
+    alert(`Local ${data["name"]} successfully created.`)
+  }
 
   return (
     <div>
