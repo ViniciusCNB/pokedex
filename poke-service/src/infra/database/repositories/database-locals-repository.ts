@@ -2,6 +2,7 @@ import { Local } from '@app/entities/local';
 import { LocalRepository } from '@app/repositories/local-repository';
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from '../database.service';
+import { DatabaseLocalMapper } from '../mappers/database-local-mapper';
 
 @Injectable()
 export class DatabaseLocalsRepository implements LocalRepository {
@@ -14,7 +15,7 @@ export class DatabaseLocalsRepository implements LocalRepository {
 
   async create(local: Local): Promise<void> {
     const query = {
-      text: '',
+      text: DatabaseLocalMapper.toCreate(local),
     };
 
     try {
@@ -30,7 +31,7 @@ export class DatabaseLocalsRepository implements LocalRepository {
   }
   async delete(id: string): Promise<void> {
     const query = {
-      text: '',
+      text: DatabaseLocalMapper.toDelete(id),
     };
 
     try {
@@ -46,7 +47,7 @@ export class DatabaseLocalsRepository implements LocalRepository {
 
   async find(id: string): Promise<Local> {
     const query = {
-      text: '',
+      text: DatabaseLocalMapper.toFind(id),
     };
 
     try {
@@ -64,7 +65,7 @@ export class DatabaseLocalsRepository implements LocalRepository {
   }
   async findAll(): Promise<Local[]> {
     const query = {
-      text: '',
+      text: DatabaseLocalMapper.toFindAll(),
     };
 
     try {

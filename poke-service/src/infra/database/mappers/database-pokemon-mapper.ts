@@ -13,7 +13,7 @@ export class DatabasePokemonMapper {
       '${pokemon.gender}',
       '${pokemon.weight.value}',
       '${pokemon.createdAt.toISOString()}'
-    )
+    );
     `;
   }
 
