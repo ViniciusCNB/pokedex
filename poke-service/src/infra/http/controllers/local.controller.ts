@@ -50,7 +50,7 @@ export class LocalsController {
     } catch (error) {
       return {
         title: 'Error',
-        message: 'Delete pokemon error!',
+        message: 'Delete local error!',
         error: error,
       };
     }
@@ -69,7 +69,7 @@ export class LocalsController {
     } catch (error) {
       return {
         title: 'Error',
-        message: 'Created pokemon error!',
+        message: 'Find local error!',
         error: error,
       };
     }
@@ -84,7 +84,7 @@ export class LocalsController {
     } catch (error) {
       return {
         title: 'Error',
-        message: 'Created pokemon error!',
+        message: 'Find all locals error!',
         error: error,
       };
     }
