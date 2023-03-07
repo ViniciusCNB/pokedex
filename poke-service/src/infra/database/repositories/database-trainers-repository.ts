@@ -2,6 +2,7 @@ import { Trainer } from '@app/entities/trainer';
 import { TrainerRepository } from '@app/repositories/trainer-repository';
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from '../database.service';
+import { DatabaseTrainerMapper } from '../mappers/database-trainer-mapper';
 
 @Injectable()
 export class DatabaseTrainersRepository implements TrainerRepository {
@@ -14,7 +15,7 @@ export class DatabaseTrainersRepository implements TrainerRepository {
 
   async create(trainer: Trainer): Promise<void> {
     const query = {
-      text: '',
+      text: DatabaseTrainerMapper.toCreate(trainer),
     };
 
     try {
@@ -30,7 +31,7 @@ export class DatabaseTrainersRepository implements TrainerRepository {
   }
   async delete(id: string): Promise<void> {
     const query = {
-      text: '',
+      text: DatabaseTrainerMapper.toDelete(id),
     };
 
     try {
@@ -46,7 +47,7 @@ export class DatabaseTrainersRepository implements TrainerRepository {
   }
   async find(id: string): Promise<Trainer> {
     const query = {
-      text: '',
+      text: DatabaseTrainerMapper.toFind(id),
     };
 
     try {
@@ -64,7 +65,7 @@ export class DatabaseTrainersRepository implements TrainerRepository {
   }
   async findAll(): Promise<Trainer[]> {
     const query = {
-      text: '',
+      text: DatabaseTrainerMapper.toFindAll(),
     };
 
     try {
