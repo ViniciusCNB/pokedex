@@ -33,16 +33,13 @@ const AddLocalModal = () => {
 
               <div className="flex flex-col mb-5">
                 <label htmlFor="" className="font-bold text-[16px]">
-                  TYPE
+                  DESCRIPTION
                 </label>
-                <select
-                  {...register("type")}
-                  className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
-                >
-                  <option value=""></option>
-                  <option value="city">City</option>
-                  <option value="area">Area</option>
-                </select>
+                <input
+                  type="text"
+                  className="bg-gray-200 text-black rounded py-3 px-4 shadow-xl"
+                  {...register("description")}
+                />
               </div>
             </div>
 
