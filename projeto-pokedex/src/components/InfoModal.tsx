@@ -1,6 +1,7 @@
 import * as Dialog from "@radix-ui/react-dialog"
 import axios from "axios"
 import { useState, useEffect } from "react"
+import ConfirmDeleteModal from "./ConfirmDeleteModal"
 
 interface InfoModalProps {
   image: string
@@ -97,6 +98,13 @@ const InfoModal = (props: InfoModalProps) => {
             </div>
           </div>
         </div>
+
+        <Dialog.Root>
+          <Dialog.Trigger className="rounded bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs">
+            DELETE
+          </Dialog.Trigger>
+          <ConfirmDeleteModal />
+        </Dialog.Root>
       </Dialog.Content>
     </Dialog.Portal>
   )
