@@ -71,11 +71,12 @@ const AddPokeModal = () => {
                 <label htmlFor="" className="font-bold text-[16px]">
                   CAPTURE LOCAL
                 </label>
-                <input
-                  type="text"
-                  className="bg-gray-200 text-black rounded py-3 px-4 shadow-xl"
+                <select
                   {...register("capture-local")}
-                />
+                  className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
+                >
+                  <option value=""></option>
+                </select>
               </div>
 
               <div className="flex flex-col mb-5">
@@ -93,11 +94,12 @@ const AddPokeModal = () => {
                 <label htmlFor="" className="font-bold text-[16px]">
                   TRAINER
                 </label>
-                <input
-                  type="text"
-                  className="bg-gray-200 text-black rounded py-[11px] px-4 shadow-xl"
+                <select
                   {...register("trainer")}
-                />
+                  className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
+                >
+                  <option value=""></option>
+                </select>
               </div>
             </div>
 
