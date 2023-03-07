@@ -2,6 +2,7 @@ import { Battle } from '@app/entities/battle';
 import { BattleRepository } from '@app/repositories/battle-repository';
 import { Injectable } from '@nestjs/common';
 import { DatabaseService } from '../database.service';
+import { DatabaseBattleMapper } from '../mappers/database-battle-mapper';
 
 @Injectable()
 export class DatabaseBattlesRepository implements BattleRepository {
@@ -14,7 +15,7 @@ export class DatabaseBattlesRepository implements BattleRepository {
 
   async create(battle: Battle): Promise<void> {
     const query = {
-      text: '',
+      text: DatabaseBattleMapper.toCreate(battle),
     };
 
     try {
@@ -30,7 +31,7 @@ export class DatabaseBattlesRepository implements BattleRepository {
   }
   async delete(id: string): Promise<void> {
     const query = {
-      text: '',
+      text: DatabaseBattleMapper.toDelete(id),
     };
 
     try {
@@ -46,7 +47,7 @@ export class DatabaseBattlesRepository implements BattleRepository {
   }
   async find(id: string): Promise<Battle> {
     const query = {
-      text: '',
+      text: DatabaseBattleMapper.toFind(id),
     };
 
     try {
@@ -64,7 +65,7 @@ export class DatabaseBattlesRepository implements BattleRepository {
   }
   async findAll(): Promise<Battle[]> {
     const query = {
-      text: '',
+      text: DatabaseBattleMapper.toFindAll(),
     };
 
     try {
