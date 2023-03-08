@@ -33,27 +33,25 @@ const AddTrainerModal = () => {
 
               <div className="flex flex-col mb-5">
                 <label htmlFor="" className="font-bold text-[16px]">
-                  GENDER
+                  AGE
                 </label>
-                <select
-                  {...register("gender")}
-                  className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
-                >
-                  <option value=""></option>
-                  <option value="female">Female</option>
-                  <option value="male">Male</option>
-                </select>
+                <input
+                  type="number"
+                  className="bg-gray-200 text-black rounded py-3 px-4 shadow-xl"
+                  {...register("age")}
+                />
               </div>
 
               <div className="flex flex-col mb-5">
                 <label htmlFor="" className="font-bold text-[16px]">
-                  AGE
+                  LOCAL
                 </label>
-                <input
-                  type="text"
-                  className="bg-gray-200 text-black rounded py-3 px-4 shadow-xl"
-                  {...register("age")}
-                />
+                <select
+                  {...register("local")}
+                  className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
+                >
+                  <option value=""></option>
+                </select>
               </div>
             </div>
 
