@@ -4,6 +4,7 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import ConfirmDeleteModal from "./ConfirmDeleteModal"
 import { Trash, Pencil } from "phosphor-react"
+import EditLocalModal from "./EditLocalModal"
 
 interface InfoModalProps {
   image: string
@@ -118,6 +119,10 @@ const InfoModal = (props: InfoModalProps) => {
                 <p className="text-sm font-semibold">CITY</p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
+                <p className="text-red-500 font-extrabold">CAPTURE DATE</p>
+                <p className="text-sm font-semibold">08/03/2023</p>
+              </div>
+              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">DESCRIPTION</p>
                 <p className="text-sm font-semibold">Area to catch pokémons.</p>
               </div>
@@ -186,7 +191,6 @@ const InfoModal = (props: InfoModalProps) => {
                 <p className="text-sm font-semibold">LOCAL: CITY</p>
               </div>
             </Tabs.Content>
-
           </Tabs.Root>
         </div>
       </Dialog.Content>
