@@ -167,28 +167,67 @@ const InfoModal = (props: InfoModalProps) => {
             >
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-green-500 font-extrabold">VICTORY</p>
-                <p className="text-sm font-semibold">AGAINST: PIKACHU [ PIKAPIKA ]</p>
-                <p className="text-sm font-semibold">LOCAL: CITY</p>
+                <p className="text-sm font-semibold">
+                  <span className="font-bold">AGAINST:</span> PIKACHU [ PIKAPIKA
+                  ]
+                </p>
+                <p className="text-sm font-semibold">
+                  <span className="font-bold">OPPONENT TRAINER:</span> BERNARDO
+                </p>
+                <p className="text-sm font-semibold">
+                  <span className="font-bold">LOCAL:</span> CITY
+                </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-green-500 font-extrabold">VICTORY</p>
-                <p className="text-sm font-semibold">AGAINST: BULBASAUR [ BULBABULBA ]</p>
-                <p className="text-sm font-semibold">LOCAL: FOREST</p>
+                <p className="text-sm font-semibold">
+                  <span className="font-bold">AGAINST:</span> BULBASAUR [
+                  BULBABULBA ]
+                </p>
+                <p className="text-sm font-semibold">
+                  <span className="font-bold">OPPONENT TRAINER:</span> VINÍCIUS
+                </p>
+                <p className="text-sm font-semibold">
+                  <span className="font-bold">LOCAL:</span> FOREST
+                </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">DEFEAT</p>
-                <p className="text-sm font-semibold">AGAINST: CHARMANDER [ CHARCHAR ]</p>
-                <p className="text-sm font-semibold">LOCAL: FOREST</p>
+                <p className="text-sm font-semibold">
+                  <span className="font-bold">AGAINST:</span> CHARMANDER [
+                  CHARCHAR ]
+                </p>
+                <p className="text-sm font-semibold">
+                  <span className="font-bold">OPPONENT TRAINER:</span> BERNARDO
+                </p>
+                <p className="text-sm font-semibold">
+                  <span className="font-bold">LOCAL:</span> FOREST
+                </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-green-500 font-extrabold">VICTORY</p>
-                <p className="text-sm font-semibold">AGAINST: METAPOD [ METAMETA ]</p>
-                <p className="text-sm font-semibold">LOCAL: CITY</p>
+                <p className="text-sm font-semibold">
+                  <span className="font-bold">AGAINST:</span> METAPOD [ METAMETA
+                  ]
+                </p>
+                <p className="text-sm font-semibold">
+                  <span className="font-bold">OPPONENT TRAINER:</span> VINÍCIUS
+                </p>
+                <p className="text-sm font-semibold">
+                  <span className="font-bold">LOCAL:</span> CITY
+                </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">DEFEAT</p>
-                <p className="text-sm font-semibold">AGAINST: PIDGEY [ PIPI ]</p>
-                <p className="text-sm font-semibold">LOCAL: CITY</p>
+                <p className="text-sm font-semibold">
+                  <span className="font-bold">AGAINST:</span> PIDGEY [ PIPI ]
+                </p>
+                <p className="text-sm font-semibold">
+                  <span className="font-bold">OPPONENT TRAINER:</span> BERNARDO
+                </p>
+                <p className="text-sm font-semibold">
+                  <span className="font-bold">LOCAL:</span> CITY
+                </p>
               </div>
             </Tabs.Content>
           </Tabs.Root>
