@@ -3,6 +3,7 @@ import * as Tabs from "@radix-ui/react-tabs"
 import axios from "axios"
 import { useState, useEffect } from "react"
 import ConfirmDeleteModal from "./ConfirmDeleteModal"
+import { Trash, Pencil } from "phosphor-react"
 
 interface InfoModalProps {
   image: string
@@ -35,7 +36,7 @@ const InfoModal = (props: InfoModalProps) => {
     <Dialog.Portal>
       <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
 
-      <Dialog.Content className="fixed bg-slate-400/90 py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg w-[50rem] h-[28rem] shadow-lg shadow-black/25">
+      <Dialog.Content className="fixed bg-slate-400/90 py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg w-[50rem] h-[25rem] shadow-lg shadow-black/25">
         <Dialog.Title className="bg-red-500 rounded-md py-2 text-2xl text-center font-extrabold mb-10 shadow-md shadow-black/25">
           POKÉMON'S INFO
         </Dialog.Title>
@@ -100,6 +101,15 @@ const InfoModal = (props: InfoModalProps) => {
                 <p className="text-red-500 font-extrabold">GENDER</p>
                 <p className="text-sm font-semibold">MALE</p>
               </div>
+              <Dialog.Root>
+                <Dialog.Trigger
+                  title="Delete Pokémon"
+                  className="rounded-[50%] bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs absolute right-10 bottom-10 shadow-sm shadow-black/25"
+                >
+                  <Trash size={17} weight="bold" />
+                </Dialog.Trigger>
+                <ConfirmDeleteModal />
+              </Dialog.Root>
             </Tabs.Content>
 
             <Tabs.Content className="grid grid-cols-2 gap-2" value="local">
@@ -111,6 +121,15 @@ const InfoModal = (props: InfoModalProps) => {
                 <p className="text-red-500 font-extrabold">DESCRIPTION</p>
                 <p className="text-sm font-semibold">Area to catch pokémons.</p>
               </div>
+              <Dialog.Root>
+                <Dialog.Trigger
+                  title="Edit Local"
+                  className="rounded-[50%] bg-slate-600 mt-3 py-2 px-3 text-white hover:bg-slate-800 font-bold text-xs absolute right-10 bottom-10 shadow-sm shadow-black/25"
+                >
+                  <Pencil size={17} weight="bold" />
+                </Dialog.Trigger>
+                <EditLocalModal />
+              </Dialog.Root>
             </Tabs.Content>
 
             <Tabs.Content className="grid grid-cols-2 gap-2" value="trainer">
@@ -126,9 +145,21 @@ const InfoModal = (props: InfoModalProps) => {
                 <p className="text-red-500 font-extrabold">LOCAL</p>
                 <p className="text-sm font-semibold">TEST LOCAL</p>
               </div>
+              <Dialog.Root>
+                <Dialog.Trigger
+                  title="Delete Trainer"
+                  className="rounded-[50%] bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs absolute right-10 bottom-10 shadow-sm shadow-black/25"
+                >
+                  <Trash size={17} weight="bold" />
+                </Dialog.Trigger>
+                <ConfirmDeleteModal />
+              </Dialog.Root>
             </Tabs.Content>
 
-            <Tabs.Content className="grid grid-cols-1 gap-2 h-[198px] overflow-hidden scrollbar" value="battle">
+            <Tabs.Content
+              className="grid grid-cols-1 gap-2 h-[197px] overflow-hidden scrollbar"
+              value="battle"
+            >
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-green-500 font-extrabold">VICTORY</p>
                 <p className="text-sm font-semibold">AGAINST: PIKACHU [ PIKAPIKA ]</p>
@@ -158,13 +189,6 @@ const InfoModal = (props: InfoModalProps) => {
 
           </Tabs.Root>
         </div>
-
-        <Dialog.Root>
-          <Dialog.Trigger className="rounded bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs">
-            DELETE
-          </Dialog.Trigger>
-          <ConfirmDeleteModal />
-        </Dialog.Root>
       </Dialog.Content>
     </Dialog.Portal>
   )
