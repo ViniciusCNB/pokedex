@@ -14,7 +14,7 @@ const Card = (props: CardProps) => {
 
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <Dialog.Trigger className="p-3 rounded-lg max-h-[150px] grid grid-cols-2 shadow-lg shadow-black/15 bg-gradient-to-r from-blue-300/40 to-blue-600/40 hover:bg-blue-300">
+      <Dialog.Trigger className="p-3 rounded-lg h-[120px] grid grid-cols-2 shadow-lg shadow-black/15 bg-gradient-to-r from-blue-300/40 to-blue-600/40 hover:bg-blue-300">
         <div className="m-auto rounded-lg">
           <img src={props.image} alt="" className="w-24" />
         </div>
