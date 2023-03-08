@@ -6,10 +6,10 @@ import CreateBattleModal from "./CreateBattleModal"
 
 const DropDownMenu = () => {
   return (
-    <div className="w-[7.6rem] absolute bg-red-500 rounded-xl mt-2">
+    <div className="w-[7.6rem] absolute bg-red-500 rounded-lg mt-2">
       <div>
         <Dialog.Root>
-          <Dialog.Trigger className="w-full font-bold text-sm rounded-t-xl p-2 text-white flex hover:bg-red-700 border-b-[1px] border-red-700 border-opacity-40">
+          <Dialog.Trigger className="w-full font-bold text-sm rounded-t-lg p-2 text-white flex hover:bg-red-700 border-b-[1px] border-red-700 border-opacity-40">
             ADD POKÉMON
           </Dialog.Trigger>
           <AddPokeModal />
@@ -36,7 +36,7 @@ const DropDownMenu = () => {
 
       <div>
         <Dialog.Root>
-          <Dialog.Trigger className="w-full font-bold text-sm rounded-b-xl p-2 text-white flex hover:bg-red-700">
+          <Dialog.Trigger className="w-full font-bold text-sm rounded-b-lg p-2 text-white flex hover:bg-red-700">
             CREATE BATTLE
           </Dialog.Trigger>
           <CreateBattleModal />
