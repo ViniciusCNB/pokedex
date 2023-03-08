@@ -104,21 +104,58 @@ const InfoModal = (props: InfoModalProps) => {
 
             <Tabs.Content className="grid grid-cols-2 gap-2" value="local">
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
-                <p className="text-red-500 font-extrabold">CAPTURE LOCAL</p>
+                <p className="text-red-500 font-extrabold">NAME</p>
                 <p className="text-sm font-semibold">CITY</p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
-                <p className="text-red-500 font-extrabold">CAPTURE DATE</p>
-                <p className="text-sm font-semibold">05/03/2023</p>
+                <p className="text-red-500 font-extrabold">DESCRIPTION</p>
+                <p className="text-sm font-semibold">Area to catch pokémons.</p>
               </div>
             </Tabs.Content>
 
             <Tabs.Content className="grid grid-cols-2 gap-2" value="trainer">
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
-                <p className="text-red-500 font-extrabold">TRAINER</p>
+                <p className="text-red-500 font-extrabold">NAME</p>
                 <p className="text-sm font-semibold">TEST NAME</p>
               </div>
+              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
+                <p className="text-red-500 font-extrabold">AGE</p>
+                <p className="text-sm font-semibold">20</p>
+              </div>
+              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
+                <p className="text-red-500 font-extrabold">LOCAL</p>
+                <p className="text-sm font-semibold">TEST LOCAL</p>
+              </div>
             </Tabs.Content>
+
+            <Tabs.Content className="grid grid-cols-1 gap-2 h-[198px] overflow-hidden scrollbar" value="battle">
+              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
+                <p className="text-green-500 font-extrabold">VICTORY</p>
+                <p className="text-sm font-semibold">AGAINST: PIKACHU [ PIKAPIKA ]</p>
+                <p className="text-sm font-semibold">LOCAL: CITY</p>
+              </div>
+              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
+                <p className="text-green-500 font-extrabold">VICTORY</p>
+                <p className="text-sm font-semibold">AGAINST: BULBASAUR [ BULBABULBA ]</p>
+                <p className="text-sm font-semibold">LOCAL: FOREST</p>
+              </div>
+              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
+                <p className="text-red-500 font-extrabold">DEFEAT</p>
+                <p className="text-sm font-semibold">AGAINST: CHARMANDER [ CHARCHAR ]</p>
+                <p className="text-sm font-semibold">LOCAL: FOREST</p>
+              </div>
+              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
+                <p className="text-green-500 font-extrabold">VICTORY</p>
+                <p className="text-sm font-semibold">AGAINST: METAPOD [ METAMETA ]</p>
+                <p className="text-sm font-semibold">LOCAL: CITY</p>
+              </div>
+              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
+                <p className="text-red-500 font-extrabold">DEFEAT</p>
+                <p className="text-sm font-semibold">AGAINST: PIDGEY [ PIPI ]</p>
+                <p className="text-sm font-semibold">LOCAL: CITY</p>
+              </div>
+            </Tabs.Content>
+
           </Tabs.Root>
         </div>
 
