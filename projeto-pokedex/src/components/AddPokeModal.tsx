@@ -13,7 +13,7 @@ const AddPokeModal = () => {
       <Dialog.Portal>
         <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
 
-        <Dialog.Content className="fixed bg-slate-400/90 py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg w-[30rem] h-[36.5rem] shadow-lg shadow-black/25">
+        <Dialog.Content className="fixed bg-slate-400/90 py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg w-[30rem] h-[30rem] shadow-lg shadow-black/25">
           <Dialog.Title className="bg-red-500 rounded-md py-2 text-2xl text-center font-extrabold mb-10">
             ADD A POKÉMON
           </Dialog.Title>
@@ -69,10 +69,10 @@ const AddPokeModal = () => {
 
               <div className="flex flex-col mb-5">
                 <label htmlFor="" className="font-bold text-[16px]">
-                  CAPTURE LOCAL
+                  TRAINER
                 </label>
                 <select
-                  {...register("capture-local")}
+                  {...register("trainer")}
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                 >
                   <option value=""></option>
@@ -81,21 +81,10 @@ const AddPokeModal = () => {
 
               <div className="flex flex-col mb-5">
                 <label htmlFor="" className="font-bold text-[16px]">
-                  CAPTURE DATE
-                </label>
-                <input
-                  type="date"
-                  className="bg-gray-200 text-black rounded py-[11px] px-4 shadow-xl"
-                  {...register("capture-date")}
-                />
-              </div>
-
-              <div className="flex flex-col mb-5">
-                <label htmlFor="" className="font-bold text-[16px]">
-                  TRAINER
+                  CAPTURE LOCAL
                 </label>
                 <select
-                  {...register("trainer")}
+                  {...register("capture-local")}
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                 >
                   <option value=""></option>
