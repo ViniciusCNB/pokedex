@@ -50,19 +50,19 @@ const InfoModal = (props: InfoModalProps) => {
           <Tabs.Root defaultValue="pokemon">
             <Tabs.List className="mb-3 flex justify-between">
               <Tabs.Trigger
-                className="bg-red-500 px-3 py-2 flex-1 uppercase font-bold text-xs hover:bg-red-700 data-[state=active]:bg-red-700 rounded-l"
+                className="bg-red-500 px-3 py-2 flex-1 uppercase font-bold text-xs hover:bg-red-700 data-[state=active]:bg-red-700 rounded-l border-r-[1px] border-red-700 border-opacity-40"
                 value="pokemon"
               >
                 Pokémon
               </Tabs.Trigger>
               <Tabs.Trigger
-                className="bg-red-500 px-3 py-2 flex-1 uppercase font-bold text-xs hover:bg-red-700 data-[state=active]:bg-red-700"
+                className="bg-red-500 px-3 py-2 flex-1 uppercase font-bold text-xs hover:bg-red-700 data-[state=active]:bg-red-700 border-r-[1px] border-red-700 border-opacity-40"
                 value="local"
               >
                 Local
               </Tabs.Trigger>
               <Tabs.Trigger
-                className="bg-red-500 px-3 py-2 flex-1 uppercase font-bold text-xs hover:bg-red-700 data-[state=active]:bg-red-700"
+                className="bg-red-500 px-3 py-2 flex-1 uppercase font-bold text-xs hover:bg-red-700 data-[state=active]:bg-red-700 border-r-[1px] border-red-700 border-opacity-40"
                 value="trainer"
               >
                 Trainer
