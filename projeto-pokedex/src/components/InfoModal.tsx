@@ -109,7 +109,7 @@ const InfoModal = (props: InfoModalProps) => {
                 >
                   <Trash size={17} weight="bold" />
                 </Dialog.Trigger>
-                <ConfirmDeleteModal />
+                <ConfirmDeleteModal label="POKÉMON" />
               </Dialog.Root>
             </Tabs.Content>
 
@@ -157,7 +157,7 @@ const InfoModal = (props: InfoModalProps) => {
                 >
                   <Trash size={17} weight="bold" />
                 </Dialog.Trigger>
-                <ConfirmDeleteModal />
+                <ConfirmDeleteModal label="TRAINER" />
               </Dialog.Root>
             </Tabs.Content>
 
