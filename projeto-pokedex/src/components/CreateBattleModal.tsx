@@ -71,6 +71,7 @@ const CreateBattleModal = () => {
                     className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                   >
                     <option value=""></option>
+                    <option value="poke-2-teste">Poke 2 Teste</option>
                   </select>
                 </div>
                 <div className="flex flex-col mb-5 w-60">
@@ -99,7 +100,20 @@ const CreateBattleModal = () => {
                 <option value="battle-local">Battle local Teste</option>
               </select>
             </div>
-            <button className="bg-red-500 text-base font-bold rounded-md p-3 text-white hover:bg-red-700 shadow-md shadow-black/25 absolute right-0 bottom-5">
+            <div className="flex flex-col mb-5 w-60">
+              <label htmlFor="" className="font-bold text-[16px]">
+                WINNER
+              </label>
+              <select
+                {...register("winner", { required: true })}
+                className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
+              >
+                <option value=""></option>
+                <option value="poke-winner-1">Pokémon 1</option>
+                <option value="poke-winner-2">Pokémon 2</option>
+              </select>
+            </div>
+            <button className="bg-red-500 text-base font-bold rounded-md p-3 text-white hover:bg-red-700 shadow-md shadow-black/25 absolute right-0 -bottom-28">
               CREATE
             </button>
           </form>
