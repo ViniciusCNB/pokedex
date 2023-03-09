@@ -21,7 +21,7 @@ const CreateBattleModal = () => {
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col items-center relative"
+            className="flex flex-col items-center h-[470px] relative overflow-hidden scrollbar"
           >
             <div className="grid grid-cols-2 gap-16">
               <div className="flex flex-col items-center">
@@ -35,10 +35,11 @@ const CreateBattleModal = () => {
                     POKÉMON 1
                   </label>
                   <select
-                    {...register("pokémon-1")}
+                    {...register("pokémon-1", { required: true })}
                     className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                   >
                     <option value=""></option>
+                    <option value="poke-1-teste">Poke 1 Teste</option>
                   </select>
                 </div>
                 <div className="flex flex-col mb-5 w-60">
@@ -46,10 +47,11 @@ const CreateBattleModal = () => {
                     TRAINER 1
                   </label>
                   <select
-                    {...register("trainer-1")}
+                    {...register("trainer-1", { required: true })}
                     className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                   >
                     <option value=""></option>
+                    <option value="trainer-1-teste">Trainer 1 Teste</option>
                   </select>
                 </div>
               </div>
@@ -65,7 +67,7 @@ const CreateBattleModal = () => {
                     POKÉMON 2
                   </label>
                   <select
-                    {...register("pokémon-2")}
+                    {...register("pokémon-2", { required: true })}
                     className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                   >
                     <option value=""></option>
@@ -76,10 +78,11 @@ const CreateBattleModal = () => {
                     TRAINER 2
                   </label>
                   <select
-                    {...register("trainer-2")}
+                    {...register("trainer-2", { required: true })}
                     className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                   >
                     <option value=""></option>
+                    <option value="trainer-2-teste">Trainer 2 Teste</option>
                   </select>
                 </div>
               </div>
@@ -89,10 +92,11 @@ const CreateBattleModal = () => {
                 BATTLE LOCAL
               </label>
               <select
-                {...register("battle-local")}
+                {...register("battle-local", { required: true })}
                 className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
               >
                 <option value=""></option>
+                <option value="battle-local">Battle local Teste</option>
               </select>
             </div>
             <button className="bg-red-500 text-base font-bold rounded-md p-3 text-white hover:bg-red-700 shadow-md shadow-black/25 absolute right-0 bottom-5">
