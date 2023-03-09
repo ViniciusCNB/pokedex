@@ -1,15 +1,13 @@
 import * as Dialog from "@radix-ui/react-dialog"
-import bulbasaur from "../assets/bulbasaur.png"
-import pikachu from "../assets/pikachu.png"
-import interrog from "../assets/interrog.png"
 import pokebola from "../assets/pokebola.png"
 
 import { useForm } from "react-hook-form"
 
 const CreateBattleModal = () => {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, reset } = useForm()
   const onSubmit = (data: any) => {
     console.log(data)
+    reset()
   }
 
   return (
