@@ -1,18 +1,18 @@
 import { CreateLocal } from '@app/use-cases/local/create-local';
-import { DeleteLocal } from '@app/use-cases/local/delete-local';
 import { FindAllLocal } from '@app/use-cases/local/find-all-local';
 import { FindLocal } from '@app/use-cases/local/find-local';
-import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
+import { UpdateLocal } from '@app/use-cases/local/update-local';
+import { Body, Controller, Get, Post, Put } from '@nestjs/common';
 import { CreateLocalBody } from '../dtos/create-local-body';
-import { DeleteLocalBody } from '../dtos/delete-local-body';
 import { FindLocalBody } from '../dtos/find-local-body';
+import { UpdateLocalBody } from '../dtos/update-local-body';
 import { LocalViewModel } from '../view-models/local-view-model';
 
 @Controller('local')
 export class LocalsController {
   constructor(
     private createLocal: CreateLocal,
-    private deleteLocal: DeleteLocal,
+    private updateLocal: UpdateLocal,
     private findLocal: FindLocal,
     private findAllLocal: FindAllLocal,
   ) {}
@@ -37,20 +37,22 @@ export class LocalsController {
     }
   }
 
-  @Delete('delete')
-  async delete(@Body() body: DeleteLocalBody) {
-    const { id } = body;
+  @Put('update')
+  async update(@Body() body: UpdateLocalBody) {
+    const { id, name, description } = body;
 
     try {
-      const response = await this.deleteLocal.execute({
+      const response = await this.updateLocal.execute({
         id,
+        name,
+        description,
       });
 
-      return LocalViewModel.toDelete(response.id);
+      return LocalViewModel.toUpdate(response.newLocal);
     } catch (error) {
       return {
         title: 'Error',
-        message: 'Delete local error!',
+        message: 'Update local error!',
         error: error,
       };
     }

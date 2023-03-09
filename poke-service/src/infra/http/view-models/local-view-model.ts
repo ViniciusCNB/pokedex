@@ -8,9 +8,10 @@ export class LocalViewModel {
     };
   }
 
-  static toDelete(id: string) {
+  static toUpdate(newLocal: Local) {
     return {
-      id,
+      name: newLocal.name,
+      description: newLocal.description,
     };
   }
 
