@@ -31,6 +31,43 @@ export class DatabasePokemonsRepository implements PokemonRepository {
     }
   }
 
+  async delete(id: string): Promise<void> {
+    const query = {
+      text: DatabasePokemonMapper.toDelete(id),
+    };
+
+    try {
+      this.client = await this.pool.connect();
+
+      await this.client.query(query);
+
+      console.log('Delete pokemon successful!');
+    } catch (error) {
+      console.log('Delete pokemon error!\n', error);
+    } finally {
+      this.client.release();
+    }
+  }
+
+  async find(id: string): Promise<Pokemon> {
+    const query = {
+      text: DatabasePokemonMapper.toFind(id),
+    };
+
+    try {
+      this.client = await this.pool.connect();
+
+      const pokemon = await this.client.query(query);
+
+      console.log('Find pokemon successful!');
+      return pokemon;
+    } catch (error) {
+      console.log('Find pokemon error!\n', error);
+    } finally {
+      this.client.release();
+    }
+  }
+
   async findAll(): Promise<Pokemon[]> {
     const query = {
       text: DatabasePokemonMapper.toFindAll(),
@@ -41,7 +78,7 @@ export class DatabasePokemonsRepository implements PokemonRepository {
 
       const response = await this.client.query(query);
 
-      console.log('Find all pokemons!');
+      console.log('Find all pokemons successful!');
       return response;
     } catch (error) {
       console.log('Find all pokemons error!\n', error);
