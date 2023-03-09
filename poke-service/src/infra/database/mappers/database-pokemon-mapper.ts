@@ -17,6 +17,22 @@ export class DatabasePokemonMapper {
     `;
   }
 
+  static toDelete(id: string) {
+    return `
+      DELETE
+      FROM Pokemon
+      WHERE id = '${id}';
+    `;
+  }
+
+  static toFind(id: string) {
+    return `
+      SELECT *
+      FROM Pokemon
+      WHERE id = '${id}';
+    `;
+  }
+
   static toFindAll() {
     return `SELECT * FROM Pokemon;`;
   }
