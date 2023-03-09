@@ -7,13 +7,17 @@ export class InMemoryLocalsRepository implements LocalRepository {
   async create(local: Local): Promise<void> {
     this.locals.push(local);
   }
-  async delete(id: string): Promise<void> {
-    const index = this.locals.findIndex((local) => local.id == id);
+
+  async update(newLocal: Local): Promise<void> {
+    const index = this.locals.findIndex((local) => local.name == newLocal.name);
     this.locals.splice(index, 1);
+    this.locals.push(newLocal);
   }
+
   async find(id: string): Promise<Local> {
     return this.locals.find((local) => local.id == id);
   }
+
   async findAll(): Promise<Local[]> {
     return this.locals;
   }
