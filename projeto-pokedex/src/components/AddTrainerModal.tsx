@@ -27,7 +27,7 @@ const AddTrainerModal = () => {
                 <input
                   type="text"
                   className="bg-gray-200 text-black rounded py-3 px-4 shadow-xl"
-                  {...register("name")}
+                  {...register("name", { required: true })}
                 />
               </div>
 
@@ -38,7 +38,7 @@ const AddTrainerModal = () => {
                 <input
                   type="number"
                   className="bg-gray-200 text-black rounded py-3 px-4 shadow-xl"
-                  {...register("age")}
+                  {...register("age", { required: true })}
                 />
               </div>
 
@@ -47,7 +47,7 @@ const AddTrainerModal = () => {
                   LOCAL
                 </label>
                 <select
-                  {...register("local")}
+                  {...register("local", { required: true })}
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                 >
                   <option value=""></option>

@@ -27,7 +27,7 @@ const AddLocalModal = () => {
                 <input
                   type="text"
                   className="bg-gray-200 text-black rounded py-3 px-4 shadow-xl"
-                  {...register("name")}
+                  {...register("name", { required: true })}
                 />
               </div>
 
@@ -38,7 +38,7 @@ const AddLocalModal = () => {
                 <input
                   type="text"
                   className="bg-gray-200 text-black rounded py-3 px-4 shadow-xl"
-                  {...register("description")}
+                  {...register("description", { required: true })}
                 />
               </div>
             </div>

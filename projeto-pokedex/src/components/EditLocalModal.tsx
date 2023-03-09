@@ -15,7 +15,7 @@ const EditLocalModal = () => {
 
         <Dialog.Content className="fixed bg-slate-400/90 py-8 px-10 text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg w-[30rem] h-[24rem] shadow-lg shadow-black/25">
           <Dialog.Title className="bg-red-500 rounded-md py-2 text-2xl text-center font-extrabold mb-10">
-            EDIT THE LOCAL
+            EDIT LOCAL
           </Dialog.Title>
 
           <form onSubmit={handleSubmit(onSubmit)} className="relative">
@@ -27,7 +27,7 @@ const EditLocalModal = () => {
                 <input
                   type="text"
                   className="bg-gray-200 text-black rounded py-3 px-4 shadow-xl"
-                  {...register("name")}
+                  {...register("name", { required: true })}
                 />
               </div>
 
@@ -38,7 +38,7 @@ const EditLocalModal = () => {
                 <input
                   type="text"
                   className="bg-gray-200 text-black rounded py-3 px-4 shadow-xl"
-                  {...register("description")}
+                  {...register("description", { required: true })}
                 />
               </div>
             </div>

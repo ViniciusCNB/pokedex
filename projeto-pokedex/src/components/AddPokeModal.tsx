@@ -27,7 +27,7 @@ const AddPokeModal = () => {
                 <input
                   type="text"
                   className="bg-gray-200 text-black rounded py-3 px-4 shadow-xl"
-                  {...register("name")}
+                  {...register("name", { required: true })}
                 />
               </div>
 
@@ -38,7 +38,7 @@ const AddPokeModal = () => {
                 <input
                   type="text"
                   className="bg-gray-200 text-black rounded py-3 px-4 shadow-xl"
-                  {...register("nickname")}
+                  {...register("nickname", { required: true })}
                 />
               </div>
 
@@ -49,7 +49,7 @@ const AddPokeModal = () => {
                 <input
                   type="number"
                   className="bg-gray-200 text-black rounded py-3 px-4 shadow-xl"
-                  {...register("weight")}
+                  {...register("weight", { required: true })}
                 />
               </div>
 
@@ -58,12 +58,11 @@ const AddPokeModal = () => {
                   GENDER
                 </label>
                 <select
-                  {...register("gender")}
+                  {...register("gender", { required: true })}
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                 >
-                  <option value=""></option>
-                  <option value="female">Female</option>
                   <option value="male">Male</option>
+                  <option value="female">Female</option>
                 </select>
               </div>
 
@@ -72,10 +71,10 @@ const AddPokeModal = () => {
                   TRAINER
                 </label>
                 <select
-                  {...register("trainer")}
+                  {...register("trainer", { required: true })}
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                 >
-                  <option value=""></option>
+                  <option value="teste">Trainer</option>
                 </select>
               </div>
 
@@ -84,10 +83,10 @@ const AddPokeModal = () => {
                   CAPTURE LOCAL
                 </label>
                 <select
-                  {...register("capture-local")}
+                  {...register("capture-local", { required: true })}
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                 >
-                  <option value=""></option>
+                  <option value="teste">Local</option>
                 </select>
               </div>
             </div>
