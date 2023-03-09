@@ -165,7 +165,7 @@ const InfoModal = (props: InfoModalProps) => {
               className="grid grid-cols-1 gap-2 h-[197px] overflow-hidden scrollbar"
               value="battle"
             >
-              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
+              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit relative">
                 <p className="text-green-500 font-extrabold">VICTORY</p>
                 <p className="text-sm font-semibold">
                   <span className="font-bold">AGAINST:</span> PIKACHU [ PIKAPIKA
@@ -177,8 +177,17 @@ const InfoModal = (props: InfoModalProps) => {
                 <p className="text-sm font-semibold">
                   <span className="font-bold">LOCAL:</span> CITY
                 </p>
+                <Dialog.Root>
+                  <Dialog.Trigger
+                    title="Delete Battle"
+                    className="rounded-[50%] bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs absolute right-3 bottom-9 shadow-sm shadow-black/25"
+                  >
+                    <Trash size={11} weight="bold" />
+                  </Dialog.Trigger>
+                  <ConfirmDeleteModal label="BATTLE" />
+                </Dialog.Root>
               </div>
-              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
+              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit relative">
                 <p className="text-green-500 font-extrabold">VICTORY</p>
                 <p className="text-sm font-semibold">
                   <span className="font-bold">AGAINST:</span> BULBASAUR [
@@ -190,8 +199,17 @@ const InfoModal = (props: InfoModalProps) => {
                 <p className="text-sm font-semibold">
                   <span className="font-bold">LOCAL:</span> FOREST
                 </p>
+                <Dialog.Root>
+                  <Dialog.Trigger
+                    title="Delete Battle"
+                    className="rounded-[50%] bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs absolute right-3 bottom-9 shadow-sm shadow-black/25"
+                  >
+                    <Trash size={11} weight="bold" />
+                  </Dialog.Trigger>
+                  <ConfirmDeleteModal label="BATTLE" />
+                </Dialog.Root>
               </div>
-              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
+              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit relative">
                 <p className="text-red-500 font-extrabold">DEFEAT</p>
                 <p className="text-sm font-semibold">
                   <span className="font-bold">AGAINST:</span> CHARMANDER [
@@ -203,8 +221,17 @@ const InfoModal = (props: InfoModalProps) => {
                 <p className="text-sm font-semibold">
                   <span className="font-bold">LOCAL:</span> FOREST
                 </p>
+                <Dialog.Root>
+                  <Dialog.Trigger
+                    title="Delete Battle"
+                    className="rounded-[50%] bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs absolute right-3 bottom-9 shadow-sm shadow-black/25"
+                  >
+                    <Trash size={11} weight="bold" />
+                  </Dialog.Trigger>
+                  <ConfirmDeleteModal label="BATTLE" />
+                </Dialog.Root>
               </div>
-              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
+              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit relative">
                 <p className="text-green-500 font-extrabold">VICTORY</p>
                 <p className="text-sm font-semibold">
                   <span className="font-bold">AGAINST:</span> METAPOD [ METAMETA
@@ -216,8 +243,17 @@ const InfoModal = (props: InfoModalProps) => {
                 <p className="text-sm font-semibold">
                   <span className="font-bold">LOCAL:</span> CITY
                 </p>
+                <Dialog.Root>
+                  <Dialog.Trigger
+                    title="Delete Battle"
+                    className="rounded-[50%] bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs absolute right-3 bottom-9 shadow-sm shadow-black/25"
+                  >
+                    <Trash size={11} weight="bold" />
+                  </Dialog.Trigger>
+                  <ConfirmDeleteModal label="BATTLE" />
+                </Dialog.Root>
               </div>
-              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
+              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit relative">
                 <p className="text-red-500 font-extrabold">DEFEAT</p>
                 <p className="text-sm font-semibold">
                   <span className="font-bold">AGAINST:</span> PIDGEY [ PIPI ]
@@ -228,6 +264,15 @@ const InfoModal = (props: InfoModalProps) => {
                 <p className="text-sm font-semibold">
                   <span className="font-bold">LOCAL:</span> CITY
                 </p>
+                <Dialog.Root>
+                  <Dialog.Trigger
+                    title="Delete Battle"
+                    className="rounded-[50%] bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs absolute right-3 bottom-9 shadow-sm shadow-black/25"
+                  >
+                    <Trash size={11} weight="bold" />
+                  </Dialog.Trigger>
+                  <ConfirmDeleteModal label="BATTLE" />
+                </Dialog.Root>
               </div>
             </Tabs.Content>
           </Tabs.Root>
