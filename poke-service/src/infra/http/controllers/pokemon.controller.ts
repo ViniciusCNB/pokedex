@@ -57,6 +57,8 @@ export class PokemonsController {
 
     try {
       const response = await this.deletePokemon.execute({ id });
+
+      return PokemonViewModel.toDelete(response.id);
     } catch (error) {
       return {
         title: 'Error',
@@ -72,6 +74,8 @@ export class PokemonsController {
 
     try {
       const { pokemon } = await this.findPokemon.execute({ id });
+
+      return PokemonViewModel.toFind(pokemon);
     } catch (error) {
       return {
         title: 'Error',
