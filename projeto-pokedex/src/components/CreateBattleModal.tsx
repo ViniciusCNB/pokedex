@@ -7,6 +7,7 @@ const CreateBattleModal = () => {
   const { register, handleSubmit, reset } = useForm()
   const onSubmit = (data: any) => {
     console.log(data)
+    alert(`Battle successfully created.`)
     reset()
   }
 

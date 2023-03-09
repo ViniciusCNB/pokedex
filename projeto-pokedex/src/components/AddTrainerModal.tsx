@@ -2,10 +2,11 @@ import * as Dialog from "@radix-ui/react-dialog"
 import { useForm } from "react-hook-form"
 
 const AddTrainerModal = () => {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, reset } = useForm()
   const onSubmit = (data: any) => {
     console.log(data)
     alert(`Trainer ${data["name"]} successfully created.`)
+    reset()
   }
 
   return (
@@ -51,6 +52,7 @@ const AddTrainerModal = () => {
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                 >
                   <option value=""></option>
+                  <option value="local">Local</option>
                 </select>
               </div>
             </div>

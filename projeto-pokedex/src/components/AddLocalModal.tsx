@@ -2,10 +2,11 @@ import * as Dialog from "@radix-ui/react-dialog"
 import { useForm } from "react-hook-form"
 
 const AddLocalModal = () => {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, reset } = useForm()
   const onSubmit = (data: any) => {
     console.log(data)
     alert(`Local ${data["name"]} successfully created.`)
+    reset()
   }
 
   return (

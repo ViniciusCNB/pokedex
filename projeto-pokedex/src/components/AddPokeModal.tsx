@@ -2,10 +2,11 @@ import * as Dialog from "@radix-ui/react-dialog"
 import { useForm } from "react-hook-form"
 
 const AddPokeModal = () => {
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit, reset } = useForm()
   const onSubmit = (data: any) => {
     console.log(data)
     alert(`Pokémon ${data["name"]} successfully created.`)
+    reset()
   }
 
   return (
@@ -61,6 +62,7 @@ const AddPokeModal = () => {
                   {...register("gender", { required: true })}
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                 >
+                  <option value=""></option>
                   <option value="male">Male</option>
                   <option value="female">Female</option>
                 </select>
@@ -74,6 +76,7 @@ const AddPokeModal = () => {
                   {...register("trainer", { required: true })}
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                 >
+                  <option value=""></option>
                   <option value="teste">Trainer</option>
                 </select>
               </div>
@@ -85,7 +88,9 @@ const AddPokeModal = () => {
                 <select
                   {...register("capture-local", { required: true })}
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
+                  defaultValue={""}
                 >
+                  <option value=""></option>
                   <option value="teste">Local</option>
                 </select>
               </div>
