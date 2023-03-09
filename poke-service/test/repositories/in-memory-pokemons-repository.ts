@@ -8,6 +8,15 @@ export class InMemoryPokemonsRepository implements PokemonRepository {
     this.pokemons.push(pokemon);
   }
 
+  async delete(id: string): Promise<void> {
+    const index = this.pokemons.findIndex((pokemon) => pokemon.id == id);
+    this.pokemons.splice(index, 1);
+  }
+
+  async find(id: string): Promise<Pokemon> {
+    return this.pokemons.find((pokemon) => pokemon.id == id);
+  }
+
   async findAll(): Promise<Pokemon[]> {
     return this.pokemons;
   }

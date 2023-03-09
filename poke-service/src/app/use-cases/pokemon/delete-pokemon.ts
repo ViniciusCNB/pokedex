@@ -1,5 +1,5 @@
-import { PokemonRepository } from '@app/repositories/pokemon-repository';
 import { Injectable } from '@nestjs/common';
+import { PokemonRepository } from '../../../app/repositories/pokemon-repository';
 
 interface DeletePokemonResponse {
   id: string;
