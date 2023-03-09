@@ -8,6 +8,7 @@ interface UpdateLocalResponse {
 }
 
 interface UpdateLocalRequest {
+  id: string;
   name: string;
   description: string;
 }
@@ -17,14 +18,14 @@ export class UpdateLocal {
   constructor(private localRepository: LocalRepository) {}
 
   async execute(request: UpdateLocalRequest): Promise<UpdateLocalResponse> {
-    const { name, description } = request;
+    const { id, name, description } = request;
 
     const newLocal = new Local({
       name,
       description: new Description(description),
     });
 
-    await this.localRepository.update(newLocal);
+    await this.localRepository.update(newLocal, id);
 
     return {
       newLocal,

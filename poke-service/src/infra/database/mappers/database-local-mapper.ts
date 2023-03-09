@@ -12,10 +12,10 @@ export class DatabaseLocalMapper {
     `;
   }
 
-  static toDelete(id: string) {
+  static toUpdate(newLocal: Local, id: string) {
     return `
-      DELETE
-      FROM Local
+      UPDATE Local
+      SET name = '${newLocal.name}', description = '${newLocal.description}'
       WHERE id = '${id}';
     `;
   }

@@ -8,8 +8,9 @@ export class InMemoryLocalsRepository implements LocalRepository {
     this.locals.push(local);
   }
 
-  async update(newLocal: Local): Promise<void> {
-    const index = this.locals.findIndex((local) => local.name == newLocal.name);
+  async update(newLocal: Local, id: string): Promise<void> {
+    const index = this.locals.findIndex((local) => local.id == id);
+    console.log(index);
     this.locals.splice(index, 1);
     this.locals.push(newLocal);
   }

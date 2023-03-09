@@ -29,9 +29,9 @@ export class DatabaseLocalsRepository implements LocalRepository {
       this.client.release();
     }
   }
-  async delete(id: string): Promise<void> {
+  async update(newLocal: Local, id: string): Promise<void> {
     const query = {
-      text: DatabaseLocalMapper.toDelete(id),
+      text: DatabaseLocalMapper.toUpdate(newLocal, id),
     };
 
     try {
@@ -39,7 +39,7 @@ export class DatabaseLocalsRepository implements LocalRepository {
 
       await this.client.query(query);
     } catch (error) {
-      console.log('Delete local error!\n', error);
+      console.log('Update local error!\n', error);
     } finally {
       this.client.release();
     }

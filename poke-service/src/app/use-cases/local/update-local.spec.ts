@@ -16,6 +16,7 @@ describe('UpdateLocal', () => {
     const { local } = await createLocal.execute(request);
 
     const request2 = {
+      id: local.id,
       name: 'Ipatinga',
       description: 'description test',
     };
