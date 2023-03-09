@@ -14,7 +14,7 @@ const PokedexMenu = (props: PokedexMenuProps) => {
         <input
           placeholder="Search Pokémon"
           type="text"
-          className="bg-gray-200 rounded py-3 px-4"
+          className="bg-gray-200 rounded py-3 px-4 shadow-sm shadow-black/25"
           onChange={(e) => {
             props.handleFilterText(e.target.value)
           }}
@@ -22,7 +22,7 @@ const PokedexMenu = (props: PokedexMenuProps) => {
 
         <div>
           <button
-            className="rounded bg-red-500 p-3 text-white hover:bg-red-700 font-bold"
+            className="rounded bg-red-500 p-3 text-white hover:bg-red-700 font-bold shadow-sm shadow-black/25"
             onClick={() => setOpen(!open)}
           >
             OPTIONS
