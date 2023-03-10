@@ -1,5 +1,5 @@
-import { BattleRepository } from '@app/repositories/battle-repository';
 import { Injectable } from '@nestjs/common';
+import { BattleRepository } from '../../../app/repositories/battle-repository';
 
 interface DeleteBattleResponse {
   id: string;

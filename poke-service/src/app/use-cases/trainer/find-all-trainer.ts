@@ -1,6 +1,6 @@
 import { Trainer } from '@app/entities/trainer';
-import { TrainerRepository } from '@app/repositories/trainer-repository';
 import { Injectable } from '@nestjs/common';
+import { TrainerRepository } from '../../../app/repositories/trainer-repository';
 
 interface FindAllTrainerResponse {
   trainer: Trainer[];

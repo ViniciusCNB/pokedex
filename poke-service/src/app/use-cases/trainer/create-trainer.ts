@@ -1,7 +1,7 @@
-import { TrainerRepository } from '@app/repositories/trainer-repository';
 import { Injectable } from '@nestjs/common';
 import { Age } from '../../../app/entities/age';
 import { Trainer } from '../../../app/entities/trainer';
+import { TrainerRepository } from '../../../app/repositories/trainer-repository';
 
 interface CreateTrainerResponse {
   trainer: Trainer;

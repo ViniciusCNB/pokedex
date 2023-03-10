@@ -1,6 +1,6 @@
 import { Battle } from '@app/entities/battle';
-import { BattleRepository } from '@app/repositories/battle-repository';
 import { Injectable } from '@nestjs/common';
+import { BattleRepository } from '../../../app/repositories/battle-repository';
 
 interface FindBattleResponse {
   battle: Battle;

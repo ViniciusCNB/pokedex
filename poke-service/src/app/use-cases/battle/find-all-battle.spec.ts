@@ -14,7 +14,7 @@ describe('FindAllBattle', () => {
       trainerId2: '3',
       pokemonId1: '4',
       pokemonId2: '5',
-      winnerId: '2',
+      winnerId: '4',
     };
 
     const createRequest2 = {
@@ -23,7 +23,7 @@ describe('FindAllBattle', () => {
       trainerId2: '8',
       pokemonId1: '9',
       pokemonId2: '10',
-      winnerId: '7',
+      winnerId: '10',
     };
 
     const battle1 = await createBattle.execute(createRequest1);

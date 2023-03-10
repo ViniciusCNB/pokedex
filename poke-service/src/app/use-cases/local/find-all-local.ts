@@ -1,6 +1,6 @@
 import { Local } from '@app/entities/local';
-import { LocalRepository } from '@app/repositories/local-repository';
 import { Injectable } from '@nestjs/common';
+import { LocalRepository } from '../../../app/repositories/local-repository';
 
 interface FindAllLocalResponse {
   local: Local[];

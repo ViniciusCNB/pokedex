@@ -10,7 +10,7 @@ describe('Battle', () => {
       trainerId2: '3',
       pokemonId1: '4',
       pokemonId2: '5',
-      winnerId: '2',
+      winnerId: '4',
     });
   });
 
@@ -39,7 +39,7 @@ describe('Battle', () => {
   });
 
   it('should have a winnerId', () => {
-    expect(battle.winnerId).toEqual('2');
+    expect(battle.winnerId).toEqual('4');
   });
 
   it('should be able to add a new localId', () => {
@@ -69,8 +69,8 @@ describe('Battle', () => {
   });
 
   it('should be able to add a new winnerId', () => {
-    battle.winnerId = '14';
-    expect(battle.winnerId).toEqual('14');
+    battle.winnerId = '16';
+    expect(battle.winnerId).toEqual('16');
   });
 
   it('should not be able to create a trainerId1 equal to trainerId2', () => {
@@ -83,8 +83,8 @@ describe('Battle', () => {
     expect(() => new Battle(battle)).toThrowError();
   });
 
-  it('should note be able to create a winnerId other than trainerId1 and trainerId2', () => {
-    battle.winnerId = '15';
+  it('should note be able to create a winnerId other than pokemonId1 and pokemonId2', () => {
+    battle.winnerId = '1';
     expect(() => new Battle(battle)).toThrowError();
   });
 });

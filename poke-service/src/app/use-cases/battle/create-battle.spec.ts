@@ -13,7 +13,7 @@ describe('CreateBattle', () => {
       trainerId2: '3',
       pokemonId1: '4',
       pokemonId2: '5',
-      winnerId: '2',
+      winnerId: '5',
     };
 
     const { battle } = await createBattle.execute(request);
@@ -28,6 +28,6 @@ describe('CreateBattle', () => {
     expect(request.pokemonId1).toEqual(battle.pokemonId1);
     expect(request.pokemonId2).toEqual(battle.pokemonId2);
     expect(request.winnerId).toEqual(battle.winnerId);
-    expect(request.winnerId).toEqual(battle.trainerId1);
+    expect(request.winnerId).toEqual(battle.pokemonId2);
   });
 });

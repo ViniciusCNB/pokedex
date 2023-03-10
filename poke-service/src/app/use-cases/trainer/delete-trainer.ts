@@ -1,5 +1,5 @@
-import { TrainerRepository } from '@app/repositories/trainer-repository';
 import { Injectable } from '@nestjs/common';
+import { TrainerRepository } from '../../../app/repositories/trainer-repository';
 
 interface DeleteTrainerResponse {
   id: string;

@@ -69,7 +69,7 @@ class CreateTables {
           ON DELETE CASCADE,  
         FOREIGN KEY (pokemonId2) REFERENCES Pokemon(id)
           ON DELETE CASCADE,  
-        FOREIGN KEY (winnerId) REFERENCES Trainer(id)
+        FOREIGN KEY (winnerId) REFERENCES Pokemon(id)
           ON DELETE CASCADE  
       );
       `,

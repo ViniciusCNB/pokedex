@@ -13,35 +13,35 @@ export class Battle {
   private props: BattleProps;
   private _id: string;
 
-  private validateTrainersValue(
-    trainerId1: string,
-    trainerId2: string,
+  private validateWinnersValue(
+    pokemonId1: string,
+    pokemonId2: string,
     winnerId: string,
   ) {
     return (
-      trainerId1 == trainerId2 ||
-      (winnerId != trainerId1 && winnerId != trainerId2)
+      pokemonId1 == pokemonId2 ||
+      (winnerId != pokemonId1 && winnerId != pokemonId2)
     );
   }
 
-  private validatePokemonsValue(pokemonId1: string, pokemonId2: string) {
-    return pokemonId1 == pokemonId2;
+  private validateTrainersValue(trainerId1: string, trainerId2: string) {
+    return trainerId1 == trainerId2;
   }
 
   constructor(props: BattleProps) {
-    const isNotTrainersValueValid = this.validateTrainersValue(
-      props.trainerId1,
-      props.trainerId2,
+    const isNotWinnersValueValid = this.validateWinnersValue(
+      props.pokemonId1,
+      props.pokemonId2,
       props.winnerId,
     );
 
-    const isNotPokemonsValueValid = this.validatePokemonsValue(
-      props.pokemonId1,
-      props.pokemonId2,
+    const isNotTrainersValueValid = this.validateTrainersValue(
+      props.trainerId1,
+      props.trainerId2,
     );
 
-    if (isNotTrainersValueValid || isNotPokemonsValueValid) {
-      throw new Error('Trainers or Pokemons value error!');
+    if (isNotWinnersValueValid || isNotTrainersValueValid) {
+      throw new Error('Winners or Trainers or Pokemons value error!');
     }
 
     this.props = props;

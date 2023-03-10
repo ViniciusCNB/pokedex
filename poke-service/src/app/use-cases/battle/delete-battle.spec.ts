@@ -14,7 +14,7 @@ describe('DeleteBattle', () => {
       trainerId2: '3',
       pokemonId1: '4',
       pokemonId2: '5',
-      winnerId: '2',
+      winnerId: '5',
     };
 
     const { battle } = await createBattle.execute(createRequest);
