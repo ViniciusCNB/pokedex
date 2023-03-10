@@ -43,15 +43,11 @@ export class PokemonsController {
 
       return PokemonViewModel.toCreate(pokemon);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Created pokemon error!',
-        error: error,
-      };
+      throw new Error(`Create pokemon error!\n${error}`);
     }
   }
 
-  @Delete('find')
+  @Delete('delete')
   async delete(@Body() body: FindPokemonBody) {
     const { id } = body;
 
@@ -60,11 +56,7 @@ export class PokemonsController {
 
       return PokemonViewModel.toDelete(response.id);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Delete pokemon error!',
-        error: error,
-      };
+      throw new Error(`Delete pokemon error!\n${error}`);
     }
   }
 
@@ -77,11 +69,7 @@ export class PokemonsController {
 
       return PokemonViewModel.toFind(pokemon);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Created pokemon error!',
-        error: error,
-      };
+      throw new Error(`Find pokemon error!\n${error}`);
     }
   }
 
@@ -92,11 +80,7 @@ export class PokemonsController {
 
       return PokemonViewModel.toFindAll(pokemon);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Find all pokemons error!',
-        error: error,
-      };
+      throw new Error(`Find all pokemons error!\n${error}`);
     }
   }
 }

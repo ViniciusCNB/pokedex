@@ -30,11 +30,7 @@ export class TrainerController {
 
       return TrainerViewModel.toCreate(trainer);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Create trainer error!',
-        error: error,
-      };
+      throw new Error(`Create trainer error!\n${error}`);
     }
   }
 
@@ -47,11 +43,7 @@ export class TrainerController {
 
       return TrainerViewModel.toDelete(response.id);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Delete trainer error!',
-        error: error,
-      };
+      throw new Error(`Delete trainer error!\n${error}`);
     }
   }
 
@@ -64,11 +56,7 @@ export class TrainerController {
 
       return TrainerViewModel.toFind(trainer);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Find trainer error!',
-        error: error,
-      };
+      throw new Error(`Find trainer error!\n${error}`);
     }
   }
 
@@ -79,11 +67,7 @@ export class TrainerController {
 
       return TrainerViewModel.toFindAll(trainer);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Find all trainers error!',
-        error: error,
-      };
+      throw new Error(`Find all trainers error!\n${error}`);
     }
   }
 }

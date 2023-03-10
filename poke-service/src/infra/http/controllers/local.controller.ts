@@ -29,7 +29,7 @@ export class LocalsController {
 
       return LocalViewModel.toCreate(local);
     } catch (error) {
-      throw new Error(error);
+      throw new Error(`Create local error!\n${error}`);
     }
   }
 
@@ -46,7 +46,7 @@ export class LocalsController {
 
       return LocalViewModel.toUpdate(response.newLocal);
     } catch (error) {
-      throw new Error(error);
+      throw new Error(`Update local error!\n${error}`);
     }
   }
 
@@ -61,7 +61,7 @@ export class LocalsController {
 
       return LocalViewModel.toFind(local);
     } catch (error) {
-      throw new Error(error);
+      throw new Error(`Find local error!\n${error}`);
     }
   }
 
@@ -72,7 +72,7 @@ export class LocalsController {
 
       return LocalViewModel.toFindAll(local);
     } catch (error) {
-      throw new Error(error);
+      throw new Error(`Find all locals error!\n${error}`);
     }
   }
 }

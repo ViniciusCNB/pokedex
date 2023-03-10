@@ -22,13 +22,14 @@ export class DatabaseBattlesRepository implements BattleRepository {
       this.client = await this.pool.connect();
 
       await this.client.query(query);
-      console.log('Create battle successful');
+      console.log('Create battle successful!');
     } catch (error) {
-      console.log('Create battle error!\n', error);
+      throw new Error(`Create battle error!\n${error}`);
     } finally {
       this.client.release();
     }
   }
+
   async delete(id: string): Promise<void> {
     const query = {
       text: DatabaseBattleMapper.toDelete(id),
@@ -38,13 +39,14 @@ export class DatabaseBattlesRepository implements BattleRepository {
       this.client = await this.pool.connect();
 
       await this.client.query(query);
-      console.log('Delete trainer successful');
+      console.log('Delete trainer successful!');
     } catch (error) {
-      console.log('Delete trainer error!\n', error);
+      throw new Error(`Delete battle error!\n${error}`);
     } finally {
       this.client.release();
     }
   }
+
   async find(id: string): Promise<Battle> {
     const query = {
       text: DatabaseBattleMapper.toFind(id),
@@ -54,15 +56,16 @@ export class DatabaseBattlesRepository implements BattleRepository {
       this.client = await this.pool.connect();
 
       const response = await this.client.query(query);
-      console.log('Find trainer successful');
+      console.log('Find trainer successful!');
 
       return response;
     } catch (error) {
-      console.log('Find trainer error!\n', error);
+      throw new Error(`Find battle error!\n${error}`);
     } finally {
       this.client.release();
     }
   }
+
   async findAll(): Promise<Battle[]> {
     const query = {
       text: DatabaseBattleMapper.toFindAll(),
@@ -72,11 +75,11 @@ export class DatabaseBattlesRepository implements BattleRepository {
       this.client = await this.pool.connect();
 
       const response = await this.client.query(query);
-      console.log('Find all battles successful');
+      console.log('Find all battles successful!');
 
       return response;
     } catch (error) {
-      console.log('Find all battles error!\n', error);
+      throw new Error(`Find all battles error!\n${error}`);
     } finally {
       this.client.release();
     }

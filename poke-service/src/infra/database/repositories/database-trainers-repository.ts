@@ -22,13 +22,14 @@ export class DatabaseTrainersRepository implements TrainerRepository {
       this.client = await this.pool.connect();
 
       await this.client.query(query);
-      console.log('Create trainer successful');
+      console.log('Create trainer successful!');
     } catch (error) {
-      console.log('Create trainer error!\n', error);
+      throw new Error(`Create trainer error!\n${error}`);
     } finally {
       this.client.release();
     }
   }
+
   async delete(id: string): Promise<void> {
     const query = {
       text: DatabaseTrainerMapper.toDelete(id),
@@ -38,13 +39,14 @@ export class DatabaseTrainersRepository implements TrainerRepository {
       this.client = await this.pool.connect();
 
       await this.client.query(query);
-      console.log('Delete trainer successful');
+      console.log('Delete trainer successful!');
     } catch (error) {
-      console.log('Delete trainer error!\n', error);
+      throw new Error(`Delete trainer error!\n${error}`);
     } finally {
       this.client.release();
     }
   }
+
   async find(id: string): Promise<Trainer> {
     const query = {
       text: DatabaseTrainerMapper.toFind(id),
@@ -58,11 +60,12 @@ export class DatabaseTrainersRepository implements TrainerRepository {
 
       return response;
     } catch (error) {
-      console.log('Find trainer error!\n', error);
+      throw new Error(`Find trainer error!\n${error}`);
     } finally {
       this.client.release();
     }
   }
+
   async findAll(): Promise<Trainer[]> {
     const query = {
       text: DatabaseTrainerMapper.toFindAll(),
@@ -72,11 +75,11 @@ export class DatabaseTrainersRepository implements TrainerRepository {
       this.client = await this.pool.connect();
 
       const response = await this.client.query(query);
-      console.log('find all trainers successful');
+      console.log('Find all trainers successful!');
 
       return response;
     } catch (error) {
-      console.log('Find all trainers error!\n', error);
+      throw new Error(`Find all trainers error!\n${error}`);
     } finally {
       this.client.release();
     }

@@ -40,11 +40,7 @@ export class BattleController {
 
       return BattleViewModel.toCreate(battle);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Create battle error!',
-        error: error,
-      };
+      throw new Error(`Create battle error!\n${error}`);
     }
   }
 
@@ -57,11 +53,7 @@ export class BattleController {
 
       return BattleViewModel.toDelete(response.id);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Delete battle error!',
-        error: error,
-      };
+      throw new Error(`Delete battle error!\n${error}`);
     }
   }
 
@@ -74,11 +66,7 @@ export class BattleController {
 
       return BattleViewModel.toFind(battle);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Find battle error!',
-        error: error,
-      };
+      throw new Error(`Find battle error!\n${error}`);
     }
   }
 
@@ -89,11 +77,7 @@ export class BattleController {
 
       return BattleViewModel.toFindAll(battle);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Find all battles error!',
-        error: error,
-      };
+      throw new Error(`Find all battles error!\n${error}`);
     }
   }
 }

@@ -24,7 +24,7 @@ export class DatabaseLocalsRepository implements LocalRepository {
       await this.client.query(query);
       console.log('Create local successful!');
     } catch (error) {
-      console.log('Create local error\n', error);
+      throw new Error(`Create local error!\n${error}`);
     } finally {
       this.client.release();
     }
@@ -38,8 +38,9 @@ export class DatabaseLocalsRepository implements LocalRepository {
       this.client = await this.pool.connect();
 
       await this.client.query(query);
+      console.log('Update local successful!');
     } catch (error) {
-      console.log('Update local error!\n', error);
+      throw new Error(`Update local error!\n${error}`);
     } finally {
       this.client.release();
     }
@@ -58,16 +59,17 @@ export class DatabaseLocalsRepository implements LocalRepository {
 
       return response;
     } catch (error) {
-      console.log('Find local error!\n', error);
+      throw new Error(`Find local error!\n${error}`);
     } finally {
       this.client.release();
     }
   }
+
   async findAll(): Promise<Local[]> {
-    console.log('Antes de fazer a query');
     const query = {
       text: DatabaseLocalMapper.toFindAll(),
     };
+
     try {
       this.client = await this.pool.connect();
 
@@ -76,7 +78,7 @@ export class DatabaseLocalsRepository implements LocalRepository {
 
       return response;
     } catch (error) {
-      console.log('Find all locals error!\n', error);
+      throw new Error(`Find all locals error!\n${error}`);
     } finally {
       this.client.release();
     }

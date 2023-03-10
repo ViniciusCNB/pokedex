@@ -23,9 +23,9 @@ export class DatabasePokemonsRepository implements PokemonRepository {
 
       await this.client.query(query);
 
-      console.log('Pokemon created!');
+      console.log('Create pokemon successful!');
     } catch (error) {
-      console.log('Create pokemon error!\n', error);
+      throw new Error(`Create pokemon error!\n${error}`);
     } finally {
       this.client.release();
     }
@@ -43,7 +43,7 @@ export class DatabasePokemonsRepository implements PokemonRepository {
 
       console.log('Delete pokemon successful!');
     } catch (error) {
-      console.log('Delete pokemon error!\n', error);
+      throw new Error(`Delete pokemon error!\n${error}`);
     } finally {
       this.client.release();
     }
@@ -62,7 +62,7 @@ export class DatabasePokemonsRepository implements PokemonRepository {
       console.log('Find pokemon successful!');
       return pokemon;
     } catch (error) {
-      console.log('Find pokemon error!\n', error);
+      throw new Error(`Find pokemon error!\n${error}`);
     } finally {
       this.client.release();
     }
@@ -81,7 +81,7 @@ export class DatabasePokemonsRepository implements PokemonRepository {
       console.log('Find all pokemons successful!');
       return response;
     } catch (error) {
-      console.log('Find all pokemons error!\n', error);
+      throw new Error(`Find all pokemons error!\n${error}`);
     } finally {
       this.client.release();
     }
