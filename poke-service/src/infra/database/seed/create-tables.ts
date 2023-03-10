@@ -13,7 +13,7 @@ class CreateTables {
     this.tables.push({
       text: `CREATE TABLE IF NOT EXISTS Local (
         id UUID PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
+        name VARCHAR(255) UNIQUE NOT NULL,
         description VARCHAR(255) NOT NULL
       );
       `,
@@ -24,7 +24,7 @@ class CreateTables {
       text: `CREATE TABLE IF NOT EXISTS Trainer (
         id UUID PRIMARY KEY,
         localId UUID NOT NULL,
-        name VARCHAR(255) NOT NULL,
+        name VARCHAR(255) UNIQUE NOT NULL,
         age INT NOT NULL,
         FOREIGN KEY (localId) REFERENCES Local(id)  
       );
@@ -39,7 +39,7 @@ class CreateTables {
         localId UUID NOT NULL,
         imageURL VARCHAR(255) NOT NULL,
         name VARCHAR(255) NOT NULL,
-        nickname VARCHAR(255) NOT NULL,
+        nickname VARCHAR(255) UNIQUE NOT NULL,
         type VARCHAR(255) NOT NULL,
         gender VARCHAR(255) NOT NULL,
         weight NUMERIC NOT NULL,
