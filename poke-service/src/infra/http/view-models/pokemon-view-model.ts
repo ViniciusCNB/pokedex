@@ -18,16 +18,16 @@ export class PokemonViewModel {
 
   static toFind(pokemon: Pokemon) {
     return {
-      id: pokemon.id,
-      trainerId: pokemon.trainerId,
-      localId: pokemon.localId,
-      imageURL: pokemon.imageURL,
-      name: pokemon.name,
-      nickname: pokemon.nickname,
-      type: pokemon.type,
-      gender: pokemon.gender,
-      weight: pokemon.weight,
-      createdAt: pokemon.createdAt,
+      id: pokemon['rows'][0].id,
+      trainerId: pokemon['rows'][0].trainerId,
+      localId: pokemon['rows'][0].localId,
+      imageURL: pokemon['rows'][0].imageURL,
+      name: pokemon['rows'][0].name,
+      nickname: pokemon['rows'][0].nickname,
+      type: pokemon['rows'][0].type,
+      gender: pokemon['rows'][0].gender,
+      weight: pokemon['rows'][0].weight,
+      createdAt: pokemon['rows'][0].createdAt,
     };
   }
 

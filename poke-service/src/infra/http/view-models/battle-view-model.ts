@@ -17,13 +17,13 @@ export class BattleViewModel {
 
   static toFind(battle: Battle) {
     return {
-      id: battle.id,
-      localId: battle.localId,
-      trainerId1: battle.trainerId1,
-      trainerId2: battle.trainerId2,
-      pokemonId1: battle.pokemonId1,
-      pokemonId2: battle.pokemonId2,
-      winnerId: battle.winnerId,
+      id: battle['rows'][0].id,
+      localId: battle['rows'][0].localId,
+      trainerId1: battle['rows'][0].trainerId1,
+      trainerId2: battle['rows'][0].trainerId2,
+      pokemonId1: battle['rows'][0].pokemonId1,
+      pokemonId2: battle['rows'][0].pokemonId2,
+      winnerId: battle['rows'][0].winnerId,
     };
   }
 

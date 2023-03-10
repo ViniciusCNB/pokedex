@@ -4,6 +4,7 @@ export class DatabasePokemonMapper {
   static toCreate(pokemon: Pokemon) {
     return `INSERT INTO Pokemon
     VALUES (
+      '${pokemon.id}',
       '${pokemon.trainerId}',
       '${pokemon.localId}',
       '${pokemon.imageURL}',

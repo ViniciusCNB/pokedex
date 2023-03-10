@@ -21,6 +21,7 @@ export class DatabaseLocalMapper {
   }
 
   static toFind(id: string) {
+    console.log(id);
     return `
       SELECT *
       FROM Local

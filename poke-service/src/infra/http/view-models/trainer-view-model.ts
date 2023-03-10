@@ -16,10 +16,10 @@ export class TrainerViewModel {
 
   static toFind(trainer: Trainer) {
     return {
-      id: trainer.id,
-      localId: trainer.localId,
-      name: trainer.name,
-      age: trainer.age,
+      id: trainer['rows'][0].id,
+      localId: trainer['rows'][0].localId,
+      name: trainer['rows'][0].name,
+      age: trainer['rows'][0].age,
     };
   }
 

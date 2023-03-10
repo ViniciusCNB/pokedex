@@ -8,7 +8,7 @@ export class DatabaseTrainerMapper {
         '${trainer.id}',
         '${trainer.localId}',
         '${trainer.name}',
-        '${trainer.age}'
+        '${trainer.age.value}'
       );
     `;
   }

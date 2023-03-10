@@ -16,10 +16,11 @@ export class LocalViewModel {
   }
 
   static toFind(local: Local) {
+    console.log(local);
     return {
-      id: local.id,
-      name: local.name,
-      description: local.description,
+      id: local['rows'][0].id,
+      name: local['rows'][0].name,
+      description: local['rows'][0].description,
     };
   }
 

@@ -45,7 +45,8 @@ class CreateTables {
         weight NUMERIC NOT NULL,
         createdAt TIMESTAMP NOT NULL,
         FOREIGN KEY (localId) REFERENCES Local(id),  
-        FOREIGN KEY (trainerId) REFERENCES Trainer(id)  
+        FOREIGN KEY (trainerId) REFERENCES Trainer(id)
+          ON DELETE CASCADE  
       );`,
     });
 
@@ -60,11 +61,16 @@ class CreateTables {
         pokemonId2 UUID NOT NULL,
         winnerId UUID NOT NULL,
         FOREIGN KEY (localId) REFERENCES Local(id),  
-        FOREIGN KEY (trainerId1) REFERENCES Trainer(id),  
-        FOREIGN KEY (trainerId2) REFERENCES Trainer(id),  
-        FOREIGN KEY (pokemonId1) REFERENCES Pokemon(id),  
-        FOREIGN KEY (pokemonId2) REFERENCES Pokemon(id),  
-        FOREIGN KEY (winnerId) REFERENCES Trainer(id)  
+        FOREIGN KEY (trainerId1) REFERENCES Trainer(id)
+          ON DELETE CASCADE,  
+        FOREIGN KEY (trainerId2) REFERENCES Trainer(id)
+          ON DELETE CASCADE,  
+        FOREIGN KEY (pokemonId1) REFERENCES Pokemon(id)
+          ON DELETE CASCADE,  
+        FOREIGN KEY (pokemonId2) REFERENCES Pokemon(id)
+          ON DELETE CASCADE,  
+        FOREIGN KEY (winnerId) REFERENCES Trainer(id)
+          ON DELETE CASCADE  
       );
       `,
     });
@@ -80,9 +86,9 @@ class CreateTables {
         await this.client.query(table);
       });
 
-      console.log('Created tables!');
+      console.log('Created tables successful!');
     } catch (error) {
-      console.log('Error created tables!\n', error);
+      throw new Error(`Create tables error!\n${error}`);
     } finally {
       this.client.release();
     }
