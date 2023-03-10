@@ -13,12 +13,12 @@ import { DatabaseTrainersRepository } from './repositories/database-trainers-rep
   providers: [
     DatabaseService,
     {
-      provide: PokemonRepository,
-      useClass: DatabasePokemonsRepository,
-    },
-    {
       provide: LocalRepository,
       useClass: DatabaseLocalsRepository,
+    },
+    {
+      provide: PokemonRepository,
+      useClass: DatabasePokemonsRepository,
     },
     {
       provide: TrainerRepository,

@@ -10,7 +10,7 @@ interface FindBattleRequest {
   id: string;
 }
 
-Injectable();
+@Injectable()
 export class FindBattle {
   constructor(private battleRepository: BattleRepository) {}
 

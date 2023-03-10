@@ -13,7 +13,7 @@ interface CreateTrainerRequest {
   age: number;
 }
 
-Injectable();
+@Injectable()
 export class CreateTrainer {
   constructor(private trainerRepository: TrainerRepository) {}
 

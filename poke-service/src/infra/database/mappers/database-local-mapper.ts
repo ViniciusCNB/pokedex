@@ -7,7 +7,7 @@ export class DatabaseLocalMapper {
       VALUES (
         '${local.id}',
         '${local.name}',
-        '${local.description}'
+        '${local.description.value}'
       );
     `;
   }
@@ -15,7 +15,7 @@ export class DatabaseLocalMapper {
   static toUpdate(newLocal: Local, id: string) {
     return `
       UPDATE Local
-      SET name = '${newLocal.name}', description = '${newLocal.description}'
+      SET name = '${newLocal.name}', description = '${newLocal.description.value}'
       WHERE id = '${id}';
     `;
   }
@@ -31,7 +31,7 @@ export class DatabaseLocalMapper {
   static toFindAll() {
     return `
       SELECT * 
-      FROM Local
+      FROM Local;
     `;
   }
 }

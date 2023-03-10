@@ -6,11 +6,12 @@ interface FindAllLocalResponse {
   local: Local[];
 }
 
-Injectable();
+@Injectable()
 export class FindAllLocal {
   constructor(private localRepository: LocalRepository) {}
 
   async execute(): Promise<FindAllLocalResponse> {
+    console.log('Antes da chamada do método no use-case');
     const local = await this.localRepository.findAll();
 
     return {

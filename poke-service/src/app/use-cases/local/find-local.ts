@@ -10,7 +10,7 @@ interface FindLocalRequest {
   id: string;
 }
 
-Injectable();
+@Injectable()
 export class FindLocal {
   constructor(private localRepository: LocalRepository) {}
 

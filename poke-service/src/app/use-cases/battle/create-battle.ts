@@ -15,7 +15,7 @@ interface CreateBattleRequest {
   winnerId: string;
 }
 
-Injectable();
+@Injectable()
 export class CreateBattle {
   constructor(private battleRepository: BattleRepository) {}
 

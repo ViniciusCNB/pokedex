@@ -64,10 +64,10 @@ export class DatabaseLocalsRepository implements LocalRepository {
     }
   }
   async findAll(): Promise<Local[]> {
+    console.log('Antes de fazer a query');
     const query = {
       text: DatabaseLocalMapper.toFindAll(),
     };
-
     try {
       this.client = await this.pool.connect();
 

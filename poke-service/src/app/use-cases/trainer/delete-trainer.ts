@@ -9,7 +9,7 @@ interface DeleteTrainerRequest {
   id: string;
 }
 
-Injectable();
+@Injectable()
 export class DeleteTrainer {
   constructor(private trainerRepository: TrainerRepository) {}
 

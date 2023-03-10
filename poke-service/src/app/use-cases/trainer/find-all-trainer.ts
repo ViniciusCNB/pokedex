@@ -6,7 +6,7 @@ interface FindAllTrainerResponse {
   trainer: Trainer[];
 }
 
-Injectable();
+@Injectable()
 export class FindAllTrainer {
   constructor(private trainerRepository: TrainerRepository) {}
 

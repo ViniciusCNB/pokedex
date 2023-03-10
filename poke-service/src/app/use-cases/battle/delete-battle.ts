@@ -9,7 +9,7 @@ interface DeleteBattleRequest {
   id: string;
 }
 
-Injectable();
+@Injectable()
 export class DeleteBattle {
   constructor(private battleRepository: BattleRepository) {}
 

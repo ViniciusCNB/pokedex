@@ -6,7 +6,7 @@ interface FindAllBattleResponse {
   battle: Battle[];
 }
 
-Injectable();
+@Injectable()
 export class FindAllBattle {
   constructor(private battleRepository: BattleRepository) {}
 

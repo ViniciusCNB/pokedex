@@ -29,11 +29,7 @@ export class LocalsController {
 
       return LocalViewModel.toCreate(local);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Create local error!',
-        error: error,
-      };
+      throw new Error(error);
     }
   }
 
@@ -50,11 +46,7 @@ export class LocalsController {
 
       return LocalViewModel.toUpdate(response.newLocal);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Update local error!',
-        error: error,
-      };
+      throw new Error(error);
     }
   }
 
@@ -69,26 +61,18 @@ export class LocalsController {
 
       return LocalViewModel.toFind(local);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Find local error!',
-        error: error,
-      };
+      throw new Error(error);
     }
   }
 
-  @Get('findAll')
+  @Get('find-all')
   async findAll() {
     try {
       const { local } = await this.findAllLocal.execute();
 
       return LocalViewModel.toFindAll(local);
     } catch (error) {
-      return {
-        title: 'Error',
-        message: 'Find all locals error!',
-        error: error,
-      };
+      throw new Error(error);
     }
   }
 }

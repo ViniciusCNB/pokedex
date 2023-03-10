@@ -10,7 +10,7 @@ interface FindTrainerRequest {
   id: string;
 }
 
-Injectable();
+@Injectable()
 export class FindTrainer {
   constructor(private trainerRepository: TrainerRepository) {}
 
