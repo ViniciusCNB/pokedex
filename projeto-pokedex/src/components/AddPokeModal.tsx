@@ -26,27 +26,24 @@ const AddPokeModal = () => {
   }
 
   const onSubmit = (data: any) => {
-    // Buscando imagem e tipo do pokémon na API
     try {
       axios(
         `https://pokeapi.co/api/v2/pokemon/${data.name.toLowerCase()}`
       ).then((response) => {
         const pokeData = {
           ...data,
-          imageurl: response["data"]["sprites"]["front_default"],
+          imageURL: response["data"]["sprites"]["front_default"],
           type: trataTipo(response["data"]["types"]),
         }
+        axios
+          .post("http://localhost:3000/pokemon/create", pokeData)
+          .then((response) => response.data)
+          .then((data) => alert(`Pokémon ${data.name} successfully created.`))
         console.log(pokeData)
       })
     } catch (error) {
-      throw new Error(`PokéAPI response error!\n${error}`)
-    } 
-
-    // Adicionando o pokémon ao banco de dados
-    try {
-    } catch (error) {
+      throw new Error(`Back-end response Created Trainer error!\n${error}`)
     } finally {
-      alert(`Pokémon ${data["name"]} successfully created.`)
       reset()
     }
   }
@@ -129,7 +126,7 @@ const AddPokeModal = () => {
                   TRAINER
                 </label>
                 <select
-                  {...register("trainer", { required: true })}
+                  {...register("trainerId", { required: true })}
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                 >
                   <option value=""></option>
@@ -146,7 +143,7 @@ const AddPokeModal = () => {
                   CAPTURE LOCAL
                 </label>
                 <select
-                  {...register("capture-local", { required: true })}
+                  {...register("localId", { required: true })}
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                 >
                   <option value=""></option>
