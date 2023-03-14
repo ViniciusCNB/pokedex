@@ -1,13 +1,69 @@
 import * as Dialog from "@radix-ui/react-dialog"
+import axios from "axios"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
+import { LocalProps } from "./AddTrainerModal"
+
+interface TrainerProps {
+  id: string
+  localId: string
+  name: string
+  age: number
+}
 
 const AddPokeModal = () => {
   const { register, handleSubmit, reset } = useForm()
-  const onSubmit = (data: any) => {
-    console.log(data)
-    alert(`Pokémon ${data["name"]} successfully created.`)
-    reset()
+  const [locals, setLocals] = useState<LocalProps[]>([])
+  const [trainers, setTrainers] = useState<TrainerProps[]>([])
+
+  const trataTipo = (res: any) => {
+    let types: string[] = []
+    res.map((type: any) => {
+      types.push(type.type.name)
+    })
+    const stringTypes = types.join(",")
+    return stringTypes
   }
+
+  const onSubmit = (data: any) => {
+    // Buscando imagem e tipo do pokémon na API
+    try {
+      axios(
+        `https://pokeapi.co/api/v2/pokemon/${data.name.toLowerCase()}`
+      ).then((response) => {
+        const pokeData = {
+          ...data,
+          imageurl: response["data"]["sprites"]["front_default"],
+          type: trataTipo(response["data"]["types"]),
+        }
+        console.log(pokeData)
+      })
+    } catch (error) {
+      throw new Error(`PokéAPI response error!\n${error}`)
+    } 
+
+    // Adicionando o pokémon ao banco de dados
+    try {
+    } catch (error) {
+    } finally {
+      alert(`Pokémon ${data["name"]} successfully created.`)
+      reset()
+    }
+  }
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/local/find-all")
+      .then((response) => response.data)
+      .then((data) => setLocals(data.locals))
+  }, [])
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/trainer/find-all")
+      .then((response) => response.data)
+      .then((data) => setTrainers(data.trainers))
+  }, [locals])
 
   return (
     <div>
@@ -77,7 +133,11 @@ const AddPokeModal = () => {
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                 >
                   <option value=""></option>
-                  <option value="teste">Trainer</option>
+                  {trainers.map((trainer) => (
+                    <option key={trainer.id} value={trainer.id}>
+                      {trainer.name}
+                    </option>
+                  ))}
                 </select>
               </div>
 
@@ -88,10 +148,13 @@ const AddPokeModal = () => {
                 <select
                   {...register("capture-local", { required: true })}
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
-                  defaultValue={""}
                 >
                   <option value=""></option>
-                  <option value="teste">Local</option>
+                  {locals.map((local) => (
+                    <option key={local.id} value={local.id}>
+                      {local.name}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
