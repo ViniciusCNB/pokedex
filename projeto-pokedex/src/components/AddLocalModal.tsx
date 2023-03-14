@@ -1,26 +1,22 @@
-import { useEffect } from "react"
-import * as Dialog from "@radix-ui/react-dialog"
-import { useForm } from "react-hook-form"
-import axios from "axios"
+import * as Dialog from "@radix-ui/react-dialog";
+import axios from "axios";
+import { useForm } from "react-hook-form";
 
 const AddLocalModal = () => {
   const { register, handleSubmit, reset } = useForm()
-  const onSubmit = (data: any) => {
-    try {
-      axios
-        .post("http://localhost:3000/local/create", data)
-        .then((response) => {
-          console.log(response)
-        })
-    } catch (error) {
-      console.log("Deu ruim")
-    }
-    // console.log(data)
-    alert(`Local ${data["name"]} successfully created.`)
-    reset()
-  }
-
   
+  const onSubmit = async (data: any) => {
+    try {
+      await axios
+        .post("http://localhost:3000/local/create", data)
+        .then((response) => response.data)
+        .then((data) => alert(`Local ${data.name} successfully created.`))
+    } catch (error) {
+      throw new Error(`Back-end response Created Local error!\n${error}`);
+    } finally {
+      reset();
+    }
+  }
 
   return (
     <div>

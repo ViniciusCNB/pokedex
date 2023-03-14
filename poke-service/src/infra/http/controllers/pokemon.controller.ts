@@ -2,7 +2,7 @@ import { CreatePokemon } from '@app/use-cases/pokemon/create-pokemon';
 import { DeletePokemon } from '@app/use-cases/pokemon/delete-pokemon';
 import { FindAllPokemon } from '@app/use-cases/pokemon/find-all-pokemon';
 import { FindPokemon } from '@app/use-cases/pokemon/find-pokemon';
-import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Response } from '@nestjs/common';
 import { CreatePokemonBody } from '../dtos/create-pokemon-body';
 import { FindPokemonBody } from '../dtos/find-pokemon-body';
 import { PokemonViewModel } from '../view-models/pokemon-view-model';
@@ -17,7 +17,7 @@ export class PokemonsController {
   ) {}
 
   @Post('create')
-  async create(@Body() body: CreatePokemonBody) {
+  async create(@Body() body: CreatePokemonBody, @Response() res) {
     const {
       trainerId,
       localId,
@@ -41,9 +41,11 @@ export class PokemonsController {
         weight,
       });
 
-      return PokemonViewModel.toCreate(pokemon);
+      return res.status(201).json(PokemonViewModel.toCreate(pokemon));
     } catch (error) {
-      throw new Error(`Create pokemon error!\n${error}`);
+      return res.status(500).json({
+        message: 'Create pokemon error!',
+      });
     }
   }
 

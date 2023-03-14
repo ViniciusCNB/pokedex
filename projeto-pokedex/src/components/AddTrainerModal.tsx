@@ -1,14 +1,38 @@
-import * as Dialog from "@radix-ui/react-dialog"
-import { useForm } from "react-hook-form"
+import * as Dialog from "@radix-ui/react-dialog";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+
+interface LocalProps {
+  id: string;
+  name: string;
+  description: string
+}
 
 const AddTrainerModal = () => {
   const { register, handleSubmit, reset } = useForm()
+  const [locals, setLocals] = useState<LocalProps[]>([]);
+  
   const onSubmit = (data: any) => {
-    console.log(data)
-    alert(`Trainer ${data["name"]} successfully created.`)
-    reset()
+    try {
+      axios
+        .post("http://localhost:3000/trainer/create", data)
+        .then((response) => response.data)
+        .then((data) => alert(`Trainer ${data.name} successfully created.`))
+    } catch (error) {
+      throw new Error(`Back-end response Created Trainer error!\n${error}`);
+    } finally {
+      reset()
+    }
   }
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/local/find-all")
+      .then((response) => response.data)
+      .then((data) => setLocals(data.locals))
+  }, [])
+  
   return (
     <div>
       <Dialog.Portal>
@@ -48,11 +72,12 @@ const AddTrainerModal = () => {
                   LOCAL
                 </label>
                 <select
-                  {...register("local", { required: true })}
+                  {...register("localId", { required: true })}
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                 >
-                  <option value=""></option>
-                  <option value="local">Local</option>
+                  {locals.map((local) => (
+                    <option key={local.id} value={local.id}>{local.name}</option>
+                  ))}
                 </select>
               </div>
             </div>
