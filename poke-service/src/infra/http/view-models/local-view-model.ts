@@ -11,7 +11,6 @@ export class LocalViewModel {
   static toUpdate(newLocal: Local) {
     return {
       name: newLocal.name,
-      description: newLocal.description,
     };
   }
 

@@ -3,7 +3,8 @@ import { Pokemon } from '@app/entities/pokemon';
 export class PokemonViewModel {
   static toCreate(pokemon: Pokemon) {
     return {
-      message: `Pokemon ${pokemon.name}(${pokemon.nickname}) successfully created!`,
+      name: pokemon.name,
+      nickname: pokemon.nickname,
     };
   }
 

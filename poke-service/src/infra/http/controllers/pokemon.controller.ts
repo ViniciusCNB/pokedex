@@ -41,7 +41,7 @@ export class PokemonsController {
         weight,
       });
 
-      return res.status(201).json(PokemonViewModel.toCreate(pokemon));
+      return PokemonViewModel.toCreate(pokemon);
     } catch (error) {
       return res.status(500).json({
         message: 'Create pokemon error!',
