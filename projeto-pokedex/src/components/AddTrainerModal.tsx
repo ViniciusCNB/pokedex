@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-interface LocalProps {
+export interface LocalProps {
   id: string;
   name: string;
   description: string
@@ -75,6 +75,7 @@ const AddTrainerModal = () => {
                   {...register("localId", { required: true })}
                   className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                 >
+                  <option value=""></option>
                   {locals.map((local) => (
                     <option key={local.id} value={local.id}>{local.name}</option>
                   ))}
