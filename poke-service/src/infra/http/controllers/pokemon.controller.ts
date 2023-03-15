@@ -2,7 +2,7 @@ import { CreatePokemon } from '@app/use-cases/pokemon/create-pokemon';
 import { DeletePokemon } from '@app/use-cases/pokemon/delete-pokemon';
 import { FindAllPokemon } from '@app/use-cases/pokemon/find-all-pokemon';
 import { FindPokemon } from '@app/use-cases/pokemon/find-pokemon';
-import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { CreatePokemonBody } from '../dtos/create-pokemon-body';
 import { FindPokemonBody } from '../dtos/find-pokemon-body';
 import { PokemonViewModel } from '../view-models/pokemon-view-model';
@@ -61,9 +61,7 @@ export class PokemonsController {
   }
 
   @Get('find')
-  async find(@Body() body: FindPokemonBody) {
-    const { id } = body;
-
+  async find(@Query('id') id: string) {
     try {
       const { pokemon } = await this.findPokemon.execute({ id });
 
