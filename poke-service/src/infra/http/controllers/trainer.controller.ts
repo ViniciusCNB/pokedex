@@ -2,10 +2,9 @@ import { CreateTrainer } from '@app/use-cases/trainer/create-trainer';
 import { DeleteTrainer } from '@app/use-cases/trainer/delete-trainer';
 import { FindAllTrainer } from '@app/use-cases/trainer/find-all-trainer';
 import { FindTrainer } from '@app/use-cases/trainer/find-trainer';
-import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { CreateTrainerBody } from '../dtos/create-trainer-body';
 import { DeleteTrainerBody } from '../dtos/delete-trainer-body';
-import { FindTrainerBody } from '../dtos/find-trainer-body';
 import { TrainerViewModel } from '../view-models/trainer-view-model';
 
 @Controller('trainer')
@@ -48,16 +47,16 @@ export class TrainerController {
   }
 
   @Get('find')
-  async find(@Body() body: FindTrainerBody) {
-    const { id } = body;
+  async find(@Query() query: any) {
+    console.log(query);
 
-    try {
-      const { trainer } = await this.findTrainer.execute({ id });
+    // try {
+    //   const { trainer } = await this.findTrainer.execute({ id });
 
-      return TrainerViewModel.toFind(trainer);
-    } catch (error) {
-      throw new Error(`Find trainer error!\n${error}`);
-    }
+    //   return TrainerViewModel.toFind(trainer);
+    // } catch (error) {
+    //   throw new Error(`Find trainer error!\n${error}`);
+    // }
   }
 
   @Get('find-all')
