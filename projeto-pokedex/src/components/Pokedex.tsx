@@ -1,26 +1,35 @@
 import { useEffect, useState } from "react"
 import Card from "./Card"
-import bulbasaur from "../assets/bulbasaur.png"
 import PokedexMenu from "./PokedexMenu"
 import axios from "axios"
 
-interface Pokemon {
-  name: string,
-  url: string
+export interface PokemonProps {
+  id: string
+  trainerid: string
+  localid: string
+  imageurl: string
+  name: string
+  nickname: string
+  type: string
+  gender: string
+  weight: string
+  createdat: string
 }
 
+
 const Pokedex = () => {
-  const [pokemons, setPokemons] = useState<Pokemon[]>()
   const [filterText, setFilterText] = useState("")
+  const [pokemons, setPokemons] = useState<PokemonProps[]>([])
 
   const handleFilterText = (text: string) => {
     setFilterText(text)
   }
 
   useEffect(() => {
-    axios("https://pokeapi.co/api/v2/pokemon").then((response) =>
-      setPokemons(response.data["results"])
-    )
+    axios
+      .get("http://localhost:3000/pokemon/find-all")
+      .then((response) => response.data)
+      .then((data) => setPokemons(data.pokemons))
   }, [])
 
   return (
@@ -35,14 +44,7 @@ const Pokedex = () => {
                 : pokemon.name.toLowerCase().includes(filterText)
             })
             .map((pokemon) => {
-              return (
-                <Card
-                  key={pokemon.url}
-                  image={bulbasaur}
-                  name={pokemon.name}
-                  url={pokemon.url}
-                />
-              )
+              return <Card key={pokemon.id} pokemon={pokemon} />
             })}
         </div>
       </div>

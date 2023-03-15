@@ -5,33 +5,33 @@ import { useState, useEffect } from "react"
 import ConfirmDeleteModal from "./ConfirmDeleteModal"
 import { Trash, Pencil } from "phosphor-react"
 import EditLocalModal from "./EditLocalModal"
+import { PokemonProps } from "./Pokedex"
+import { LocalProps } from "./AddTrainerModal"
+import { TrainerProps } from "./AddPokeModal"
 
 interface InfoModalProps {
-  image: string
-  name: string
-  url: string
-}
-
-interface Pokemon {
-  weight: number
-  types: {
-    0: {
-      type: {
-        name: string
-      }
-    }
-  }
-  sprites: {
-    front_default: string
-  }
+  pokemonId: string
 }
 
 const InfoModal = (props: InfoModalProps) => {
-  const [pokemon, setPokemon] = useState<Pokemon>()
+  const [local, setLocal] = useState<LocalProps>()
+  const [trainer, setTrainer] = useState<TrainerProps>()
+  console.log(props.pokemonId)
+  const pokeId = { id: props.pokemonId }
 
   useEffect(() => {
-    axios(props.url).then((response) => setPokemon(response.data))
+    axios
+      .get("http://localhost:3000/pokemon/find", { params: pokeId })
+      .then((response) => console.log(response))
+    // .then((data) => setLocal(data.locals))
   }, [])
+
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3000/trainer/find", { params: trainerId })
+  //     .then((response) => console.log(response.data))
+  //   // .then((data) => setLocal(data.locals))
+  // }, [])
 
   return (
     <Dialog.Portal>
@@ -44,7 +44,7 @@ const InfoModal = (props: InfoModalProps) => {
 
         <div className="grid grid-cols-2 h-[16rem]">
           <img
-            src={pokemon?.sprites.front_default}
+            // src={props.pokemon.imageurl}
             alt=""
             className="w-60 bg-slate-200/80 rounded-lg shadow-md shadow-black/25"
           />
@@ -81,26 +81,30 @@ const InfoModal = (props: InfoModalProps) => {
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">NAME</p>
                 <p className="text-sm font-semibold">
-                  {props.name.toUpperCase()}
+                  {/* {props.pokemon.name.toUpperCase()} */}
                 </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">NICKNAME</p>
-                <p className="text-sm font-semibold">TEST NICKNAME</p>
+                <p className="text-sm font-semibold">
+                  {/* {props.pokemon.nickname.toUpperCase()} */}
+                </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">TYPE</p>
                 <p className="text-sm font-semibold">
-                  {pokemon?.types[0].type.name.toUpperCase()}
+                  {/* {props.pokemon.type.toUpperCase()} */}
                 </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">WEIGHT</p>
-                <p className="text-sm font-semibold">{pokemon?.weight}</p>
+                {/* <p className="text-sm font-semibold">{props.pokemon.weight}</p> */}
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">GENDER</p>
-                <p className="text-sm font-semibold">MALE</p>
+                <p className="text-sm font-semibold">
+                  {/* {props.pokemon.gender.toUpperCase()} */}
+                </p>
               </div>
               <Dialog.Root>
                 <Dialog.Trigger

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { LocalProps } from "./AddTrainerModal"
 
-interface TrainerProps {
+export interface TrainerProps {
   id: string
   localId: string
   name: string
