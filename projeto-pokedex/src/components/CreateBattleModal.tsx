@@ -36,7 +36,7 @@ const CreateBattleModal = () => {
                     POKÉMON 1
                   </label>
                   <select
-                    {...register("pokémon-1", { required: true })}
+                    {...register("pokemonId1", { required: true })}
                     className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                   >
                     <option value=""></option>
@@ -48,7 +48,7 @@ const CreateBattleModal = () => {
                     TRAINER 1
                   </label>
                   <select
-                    {...register("trainer-1", { required: true })}
+                    {...register("trainerId1", { required: true })}
                     className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                   >
                     <option value=""></option>
@@ -68,7 +68,7 @@ const CreateBattleModal = () => {
                     POKÉMON 2
                   </label>
                   <select
-                    {...register("pokémon-2", { required: true })}
+                    {...register("pokemonId2", { required: true })}
                     className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                   >
                     <option value=""></option>
@@ -80,7 +80,7 @@ const CreateBattleModal = () => {
                     TRAINER 2
                   </label>
                   <select
-                    {...register("trainer-2", { required: true })}
+                    {...register("trainerId2", { required: true })}
                     className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                   >
                     <option value=""></option>
@@ -94,7 +94,7 @@ const CreateBattleModal = () => {
                 BATTLE LOCAL
               </label>
               <select
-                {...register("battle-local", { required: true })}
+                {...register("localId", { required: true })}
                 className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
               >
                 <option value=""></option>
@@ -106,7 +106,7 @@ const CreateBattleModal = () => {
                 WINNER
               </label>
               <select
-                {...register("winner", { required: true })}
+                {...register("winnerId", { required: true })}
                 className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
               >
                 <option value=""></option>

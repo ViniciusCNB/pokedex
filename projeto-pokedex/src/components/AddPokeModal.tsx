@@ -29,7 +29,8 @@ const AddPokeModal = () => {
     try {
       axios(
         `https://pokeapi.co/api/v2/pokemon/${data.name.toLowerCase()}`
-      ).then((response) => {
+      )
+      .then((response) => {
         const pokeData = {
           ...data,
           imageURL: response["data"]["sprites"]["front_default"],
