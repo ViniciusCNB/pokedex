@@ -62,8 +62,10 @@ export class PokemonsController {
 
   @Get('find')
   async find(@Query('id') id: string) {
+    console.log(id);
     try {
       const { pokemon } = await this.findPokemon.execute({ id });
+      console.log(pokemon);
 
       return PokemonViewModel.toFind(pokemon);
     } catch (error) {

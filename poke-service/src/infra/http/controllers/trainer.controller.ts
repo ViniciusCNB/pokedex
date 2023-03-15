@@ -47,16 +47,16 @@ export class TrainerController {
   }
 
   @Get('find')
-  async find(@Query() query: any) {
-    console.log(query);
+  async find(@Query() query: { id: string }) {
+    const { id } = query;
 
-    // try {
-    //   const { trainer } = await this.findTrainer.execute({ id });
+    try {
+      const { trainer } = await this.findTrainer.execute({ id });
 
-    //   return TrainerViewModel.toFind(trainer);
-    // } catch (error) {
-    //   throw new Error(`Find trainer error!\n${error}`);
-    // }
+      return TrainerViewModel.toFind(trainer);
+    } catch (error) {
+      throw new Error(`Find trainer error!\n${error}`);
+    }
   }
 
   @Get('find-all')
