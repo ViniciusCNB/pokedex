@@ -1,13 +1,12 @@
 import * as Dialog from "@radix-ui/react-dialog"
 import * as Tabs from "@radix-ui/react-tabs"
 import axios from "axios"
-import { useState, useEffect } from "react"
-import ConfirmDeleteModal from "./ConfirmDeleteModal"
-import { Trash, Pencil } from "phosphor-react"
-import EditLocalModal from "./EditLocalModal"
-import { PokemonProps } from "./Pokedex"
-import { LocalProps } from "./AddTrainerModal"
+import { Pencil, Trash } from "phosphor-react"
+import { useEffect, useState } from "react"
 import { TrainerProps } from "./AddPokeModal"
+import { LocalProps } from "./AddTrainerModal"
+import ConfirmDeleteModal from "./ConfirmDeleteModal"
+import EditLocalModal from "./EditLocalModal"
 
 interface InfoModalProps {
   pokemonId: string

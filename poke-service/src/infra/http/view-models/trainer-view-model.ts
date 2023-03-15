@@ -17,7 +17,7 @@ export class TrainerViewModel {
   static toFind(trainer: Trainer) {
     return {
       id: trainer['rows'][0].id,
-      localId: trainer['rows'][0].localId,
+      localId: trainer['rows'][0].localid,
       name: trainer['rows'][0].name,
       age: trainer['rows'][0].age,
     };
