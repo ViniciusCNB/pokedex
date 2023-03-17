@@ -15,7 +15,6 @@ export class LocalViewModel {
   }
 
   static toFind(local: Local) {
-    console.log(local);
     return {
       id: local['rows'][0].id,
       name: local['rows'][0].name,

@@ -7,31 +7,42 @@ import { TrainerProps } from "./AddPokeModal"
 import { LocalProps } from "./AddTrainerModal"
 import ConfirmDeleteModal from "./ConfirmDeleteModal"
 import EditLocalModal from "./EditLocalModal"
+import { PokemonProps } from "./Pokedex"
+import pokebola from "../assets/pokebola.png"
 
 interface InfoModalProps {
   pokemonId: string
+  localId: string
+  trainerId: string
 }
 
 const InfoModal = (props: InfoModalProps) => {
   const [local, setLocal] = useState<LocalProps>()
   const [trainer, setTrainer] = useState<TrainerProps>()
-  console.log(props.pokemonId)
+  const [pokemon, setPokemon] = useState<PokemonProps>()
   const pokeId = { id: props.pokemonId }
+  const locId = { id: props.localId }
+  const trainId = { id: props.trainerId }
 
   useEffect(() => {
     axios
       .get("http://localhost:3000/pokemon/find", { params: pokeId })
-      .then((response) => console.log(response))
-    // .then((data) => setLocal(data.locals))
+      .then((response) => setPokemon(response.data))
   }, [])
 
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3000/trainer/find", { params: trainerId })
-  //     .then((response) => console.log(response.data))
-  //   // .then((data) => setLocal(data.locals))
-  // }, [])
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/local/find", { params: locId })
+      .then((response) => setLocal(response.data))
+  }, [])
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/trainer/find", { params: trainId })
+      .then((response) => setTrainer(response.data))
+  }, [])
+
+  console.log(pokemon)
   return (
     <Dialog.Portal>
       <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
@@ -43,7 +54,7 @@ const InfoModal = (props: InfoModalProps) => {
 
         <div className="grid grid-cols-2 h-[16rem]">
           <img
-            // src={props.pokemon.imageurl}
+            src={pokemon?.imageurl == undefined ? pokebola : pokemon?.imageurl}
             alt=""
             className="w-60 bg-slate-200/80 rounded-lg shadow-md shadow-black/25"
           />
@@ -80,29 +91,29 @@ const InfoModal = (props: InfoModalProps) => {
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">NAME</p>
                 <p className="text-sm font-semibold">
-                  {/* {props.pokemon.name.toUpperCase()} */}
+                  {pokemon?.name.toUpperCase()}
                 </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">NICKNAME</p>
                 <p className="text-sm font-semibold">
-                  {/* {props.pokemon.nickname.toUpperCase()} */}
+                  {pokemon?.nickname.toUpperCase()}
                 </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">TYPE</p>
                 <p className="text-sm font-semibold">
-                  {/* {props.pokemon.type.toUpperCase()} */}
+                  {pokemon?.type.toUpperCase()}
                 </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">WEIGHT</p>
-                {/* <p className="text-sm font-semibold">{props.pokemon.weight}</p> */}
+                <p className="text-sm font-semibold">{pokemon?.weight}</p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">GENDER</p>
                 <p className="text-sm font-semibold">
-                  {/* {props.pokemon.gender.toUpperCase()} */}
+                  {pokemon?.gender.toUpperCase()}
                 </p>
               </div>
               <Dialog.Root>
@@ -119,15 +130,15 @@ const InfoModal = (props: InfoModalProps) => {
             <Tabs.Content className="grid grid-cols-2 gap-2" value="local">
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">NAME</p>
-                <p className="text-sm font-semibold">CITY</p>
+                <p className="text-sm font-semibold">{local?.name}</p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">CAPTURE DATE</p>
-                <p className="text-sm font-semibold">08/03/2023</p>
+                <p className="text-sm font-semibold">{pokemon?.createdat}</p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">DESCRIPTION</p>
-                <p className="text-sm font-semibold">Area to catch pokémons.</p>
+                <p className="text-sm font-semibold">{local?.description}</p>
               </div>
               <Dialog.Root>
                 <Dialog.Trigger
@@ -143,15 +154,15 @@ const InfoModal = (props: InfoModalProps) => {
             <Tabs.Content className="grid grid-cols-2 gap-2" value="trainer">
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">NAME</p>
-                <p className="text-sm font-semibold">TEST NAME</p>
+                <p className="text-sm font-semibold">{trainer?.name}</p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">AGE</p>
-                <p className="text-sm font-semibold">20</p>
+                <p className="text-sm font-semibold">{trainer?.age}</p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">LOCAL</p>
-                <p className="text-sm font-semibold">TEST LOCAL</p>
+                <p className="text-sm font-semibold">{trainer?.localId}</p>
               </div>
               <Dialog.Root>
                 <Dialog.Trigger

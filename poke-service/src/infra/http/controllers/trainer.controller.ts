@@ -47,9 +47,7 @@ export class TrainerController {
   }
 
   @Get('find')
-  async find(@Query() query: { id: string }) {
-    const { id } = query;
-
+  async find(@Query('id') id: string) {
     try {
       const { trainer } = await this.findTrainer.execute({ id });
 

@@ -2,7 +2,7 @@ import { CreateLocal } from '@app/use-cases/local/create-local';
 import { FindAllLocal } from '@app/use-cases/local/find-all-local';
 import { FindLocal } from '@app/use-cases/local/find-local';
 import { UpdateLocal } from '@app/use-cases/local/update-local';
-import { Body, Controller, Get, Post, Put } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put, Query } from '@nestjs/common';
 import { CreateLocalBody } from '../dtos/create-local-body';
 import { FindLocalBody } from '../dtos/find-local-body';
 import { UpdateLocalBody } from '../dtos/update-local-body';
@@ -51,9 +51,7 @@ export class LocalsController {
   }
 
   @Get('find')
-  async find(@Body() body: FindLocalBody) {
-    const { id } = body;
-
+  async find(@Query('id') id: string) {
     try {
       const { local } = await this.findLocal.execute({
         id,

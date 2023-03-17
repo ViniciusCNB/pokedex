@@ -1,11 +1,12 @@
+import { lazy, useState, Suspense } from "react"
 import * as Dialog from "@radix-ui/react-dialog"
-import { useState } from "react"
-import InfoModal from "./InfoModal"
 import { PokemonProps } from "./Pokedex"
 
 interface CardProps {
   pokemon: PokemonProps
 }
+
+const LazyInfoModal = lazy(() => import("./InfoModal"))
 
 const Card = (props: CardProps) => {
   const [open, setOpen] = useState(false)
@@ -18,8 +19,15 @@ const Card = (props: CardProps) => {
           {props.pokemon.name.toUpperCase()}
         </p>
       </Dialog.Trigger>
-
-      <InfoModal pokemonId={props.pokemon.id} />
+      {open && (
+        <Suspense>
+          <LazyInfoModal
+            pokemonId={props.pokemon.id}
+            localId={props.pokemon.localid}
+            trainerId={props.pokemon.trainerid}
+          />
+        </Suspense>
+      )}
     </Dialog.Root>
   )
 }
