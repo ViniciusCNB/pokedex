@@ -37,4 +37,12 @@ export class DatabasePokemonMapper {
   static toFindAll() {
     return `SELECT * FROM Pokemon;`;
   }
+
+  static toFindByTrainerId(trainerId: string) {
+    return `
+      SELECT * 
+      FROM Pokemon
+      WHERE trainerId = '${trainerId}';
+    `;
+  }
 }

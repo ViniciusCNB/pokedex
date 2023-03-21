@@ -9,6 +9,7 @@ import { UpdateLocal } from '@app/use-cases/local/update-local';
 import { DeletePokemon } from '@app/use-cases/pokemon/delete-pokemon';
 import { FindAllPokemon } from '@app/use-cases/pokemon/find-all-pokemon';
 import { FindPokemon } from '@app/use-cases/pokemon/find-pokemon';
+import { FindPokemonsByTrainerId } from '@app/use-cases/pokemon/find-pokemon-by-trainerId';
 import { CreateTrainer } from '@app/use-cases/trainer/create-trainer';
 import { DeleteTrainer } from '@app/use-cases/trainer/delete-trainer';
 import { FindAllTrainer } from '@app/use-cases/trainer/find-all-trainer';
@@ -34,6 +35,7 @@ import { TrainerController } from './controllers/trainer.controller';
     FindAllPokemon,
     FindPokemon,
     DeletePokemon,
+    FindPokemonsByTrainerId,
     CreateLocal,
     UpdateLocal,
     FindLocal,

@@ -36,4 +36,11 @@ export class PokemonViewModel {
       count: pokemon['rowCount'],
     };
   }
+
+  static toFindByTrainerId(pokemon: Pokemon[]) {
+    return {
+      pokemons: pokemon['rows'],
+      count: pokemon['rowCount'],
+    };
+  }
 }

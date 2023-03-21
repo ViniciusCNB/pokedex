@@ -5,4 +5,5 @@ export abstract class PokemonRepository {
   abstract delete(id: string): Promise<void>;
   abstract find(id: string): Promise<Pokemon>;
   abstract findAll(): Promise<Pokemon[]>;
+  abstract findByTrainerId(trainerId: string): Promise<Pokemon[]>;
 }

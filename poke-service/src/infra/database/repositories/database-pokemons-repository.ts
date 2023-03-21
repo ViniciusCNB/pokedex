@@ -49,6 +49,25 @@ export class DatabasePokemonsRepository implements PokemonRepository {
     }
   }
 
+  async findByTrainerId(trainerId: string): Promise<Pokemon[]> {
+    const query = {
+      text: DatabasePokemonMapper.toFindByTrainerId(trainerId),
+    };
+
+    try {
+      this.client = await this.pool.connect();
+
+      const pokemon = await this.client.query(query);
+
+      console.log('Find pokemon by trainerId successful!');
+      return pokemon;
+    } catch (error) {
+      throw new Error(`Find pokemon pokemon by trainerId error!\n${error}`);
+    } finally {
+      this.client.release();
+    }
+  }
+
   async find(id: string): Promise<Pokemon> {
     const query = {
       text: DatabasePokemonMapper.toFind(id),

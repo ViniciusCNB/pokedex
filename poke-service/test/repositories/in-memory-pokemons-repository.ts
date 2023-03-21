@@ -2,6 +2,9 @@ import { Pokemon } from '@app/entities/pokemon';
 import { PokemonRepository } from '@app/repositories/pokemon-repository';
 
 export class InMemoryPokemonsRepository implements PokemonRepository {
+  findByTrainerId(trainerId: string): Promise<Pokemon[]> {
+    throw new Error('Method not implemented.');
+  }
   public pokemons: Pokemon[] = [];
 
   async create(pokemon: Pokemon) {

@@ -2,6 +2,7 @@ import { CreatePokemon } from '@app/use-cases/pokemon/create-pokemon';
 import { DeletePokemon } from '@app/use-cases/pokemon/delete-pokemon';
 import { FindAllPokemon } from '@app/use-cases/pokemon/find-all-pokemon';
 import { FindPokemon } from '@app/use-cases/pokemon/find-pokemon';
+import { FindPokemonsByTrainerId } from '@app/use-cases/pokemon/find-pokemon-by-trainerId';
 import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { CreatePokemonBody } from '../dtos/create-pokemon-body';
 import { FindPokemonBody } from '../dtos/find-pokemon-body';
@@ -14,6 +15,7 @@ export class PokemonsController {
     private deletePokemon: DeletePokemon,
     private findPokemon: FindPokemon,
     private findAllPokemon: FindAllPokemon,
+    private findPokemonsByTrainerId: FindPokemonsByTrainerId,
   ) {}
 
   @Post('create')
@@ -81,6 +83,21 @@ export class PokemonsController {
       return PokemonViewModel.toFindAll(pokemon);
     } catch (error) {
       throw new Error(`Find all pokemons error!\n${error}`);
+    }
+  }
+
+  @Get('find-by-trainerId')
+  async findByTrainerId(@Query('trainerId') trainerId: string) {
+    // console.log(id);
+    try {
+      const { pokemon } = await this.findPokemonsByTrainerId.execute({
+        trainerId,
+      });
+      // console.log(pokemon);
+
+      return PokemonViewModel.toFindByTrainerId(pokemon);
+    } catch (error) {
+      throw new Error(`Find by trainerId pokemon error!\n${error}`);
     }
   }
 }
