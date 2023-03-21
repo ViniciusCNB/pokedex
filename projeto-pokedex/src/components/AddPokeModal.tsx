@@ -33,7 +33,7 @@ const AddPokeModal = () => {
       .then((response) => {
         const pokeData = {
           ...data,
-          imageURL: response["data"]["sprites"]["front_default"],
+          imageurl: response["data"]["sprites"]["front_default"],
           type: trataTipo(response["data"]["types"]),
         }
         axios
