@@ -11,7 +11,7 @@ import { PokemonProps } from "./Pokedex"
 import pokebola from "../assets/pokebola.png"
 
 interface InfoModalProps {
-  pokemonId: string
+  pokemon: PokemonProps
   localId: string
   trainerId: string
 }
@@ -20,15 +20,9 @@ const InfoModal = (props: InfoModalProps) => {
   const [local, setLocal] = useState<LocalProps>()
   const [trainer, setTrainer] = useState<TrainerProps>()
   const [pokemon, setPokemon] = useState<PokemonProps>()
-  const pokeId = { id: props.pokemonId }
   const locId = { id: props.localId }
   const trainId = { id: props.trainerId }
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/pokemon/find", { params: pokeId })
-      .then((response) => setPokemon(response.data))
-  }, [])
+  const trainLocId = { id: trainer?.localId }
 
   useEffect(() => {
     axios
@@ -54,7 +48,7 @@ const InfoModal = (props: InfoModalProps) => {
 
         <div className="grid grid-cols-2 h-[16rem]">
           <img
-            src={pokemon?.imageurl == undefined ? pokebola : pokemon?.imageurl}
+            src={props.pokemon.imageurl == undefined ? pokebola : props.pokemon.imageurl}
             alt=""
             className="w-60 bg-slate-200/80 rounded-lg shadow-md shadow-black/25"
           />
@@ -91,29 +85,29 @@ const InfoModal = (props: InfoModalProps) => {
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">NAME</p>
                 <p className="text-sm font-semibold">
-                  {pokemon?.name.toUpperCase()}
+                  {props.pokemon.name.toUpperCase()}
                 </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">NICKNAME</p>
                 <p className="text-sm font-semibold">
-                  {pokemon?.nickname.toUpperCase()}
+                  {props.pokemon.nickname.toUpperCase()}
                 </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">TYPE</p>
                 <p className="text-sm font-semibold">
-                  {pokemon?.type.toUpperCase()}
+                  {props.pokemon.type.toUpperCase()}
                 </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">WEIGHT</p>
-                <p className="text-sm font-semibold">{pokemon?.weight}</p>
+                <p className="text-sm font-semibold">{props.pokemon.weight}</p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">GENDER</p>
                 <p className="text-sm font-semibold">
-                  {pokemon?.gender.toUpperCase()}
+                  {props.pokemon.gender.toUpperCase()}
                 </p>
               </div>
               <Dialog.Root>
@@ -134,7 +128,7 @@ const InfoModal = (props: InfoModalProps) => {
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">CAPTURE DATE</p>
-                <p className="text-sm font-semibold">{pokemon?.createdat}</p>
+                <p className="text-sm font-semibold">{formatDate()}</p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">DESCRIPTION</p>
@@ -162,7 +156,7 @@ const InfoModal = (props: InfoModalProps) => {
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">LOCAL</p>
-                <p className="text-sm font-semibold">{trainer?.localId}</p>
+                <p className="text-sm font-semibold">{trainerLocal}</p>
               </div>
               <Dialog.Root>
                 <Dialog.Trigger

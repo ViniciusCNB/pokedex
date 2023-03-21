@@ -22,7 +22,7 @@ const Card = (props: CardProps) => {
       {open && (
         <Suspense>
           <LazyInfoModal
-            pokemonId={props.pokemon.id}
+            pokemon={props.pokemon}
             localId={props.pokemon.localid}
             trainerId={props.pokemon.trainerid}
           />
