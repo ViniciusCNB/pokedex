@@ -47,7 +47,7 @@ export class DatabaseBattlesRepository implements BattleRepository {
     }
   }
 
-  async find(pokemonId: string): Promise<Battle> {
+  async find(pokemonId: string): Promise<Battle[]> {
     const query = {
       text: DatabaseBattleMapper.toFind(pokemonId),
     };
@@ -58,6 +58,7 @@ export class DatabaseBattlesRepository implements BattleRepository {
       const response = await this.client.query(query);
       console.log('Find trainer successful!');
 
+      console.log(response);
       return response;
     } catch (error) {
       throw new Error(`Find battle error!\n${error}`);

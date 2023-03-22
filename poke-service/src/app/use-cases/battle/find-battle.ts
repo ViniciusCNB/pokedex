@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { BattleRepository } from '../../../app/repositories/battle-repository';
 
 interface FindBattleResponse {
-  battle: Battle;
+  battle: Battle[];
 }
 
 interface FindBattleRequest {

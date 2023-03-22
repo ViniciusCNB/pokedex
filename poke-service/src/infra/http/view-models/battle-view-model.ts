@@ -15,15 +15,10 @@ export class BattleViewModel {
     };
   }
 
-  static toFind(battle: Battle) {
+  static toFind(battle: Battle[]) {
     return {
-      id: battle['rows'][0].id,
-      localId: battle['rows'][0].localid,
-      trainerId1: battle['rows'][0].trainerid1,
-      trainerId2: battle['rows'][0].trainerid2,
-      pokemonId1: battle['rows'][0].pokemonid1,
-      pokemonId2: battle['rows'][0].pokemonid2,
-      winnerId: battle['rows'][0].winnerid,
+      battles: battle['rows'],
+      count: battle['rowCount'],
     };
   }
 
