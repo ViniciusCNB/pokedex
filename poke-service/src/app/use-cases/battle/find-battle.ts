@@ -7,7 +7,8 @@ interface FindBattleResponse {
 }
 
 interface FindBattleRequest {
-  id: string;
+  pokemonId1: string;
+  pokemonId2: string;
 }
 
 @Injectable()
@@ -15,9 +16,9 @@ export class FindBattle {
   constructor(private battleRepository: BattleRepository) {}
 
   async execute(request: FindBattleRequest): Promise<FindBattleResponse> {
-    const { id } = request;
+    const { pokemonId1, pokemonId2 } = request;
 
-    const battle = await this.battleRepository.find(id);
+    const battle = await this.battleRepository.find(pokemonId1, pokemonId2);
 
     return {
       battle,

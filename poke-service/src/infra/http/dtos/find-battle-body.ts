@@ -3,5 +3,9 @@ import { IsNotEmpty, IsUUID } from 'class-validator';
 export class FindBattleBody {
   @IsNotEmpty()
   @IsUUID()
-  id: string;
+  pokemonId1: string;
+
+  @IsNotEmpty()
+  @IsUUID()
+  pokemonId2: string;
 }

@@ -24,11 +24,11 @@ export class DatabaseBattleMapper {
     `;
   }
 
-  static toFind(id: string) {
+  static toFind(pokemonId1: string, pokemonId2: string) {
     return `
       SELECT *
       FROM Battle
-      WHERE id = '${id}';
+      WHERE pokemonId1 = '${pokemonId1}' OR pokemonId2 = '${pokemonId2}';
     `;
   }
 

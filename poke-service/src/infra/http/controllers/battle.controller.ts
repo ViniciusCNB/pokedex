@@ -59,10 +59,13 @@ export class BattleController {
 
   @Get('find')
   async find(@Body() body: FindBattleBody) {
-    const { id } = body;
+    const { pokemonId1, pokemonId2 } = body;
 
     try {
-      const { battle } = await this.findBattle.execute({ id });
+      const { battle } = await this.findBattle.execute({
+        pokemonId1,
+        pokemonId2,
+      });
 
       return BattleViewModel.toFind(battle);
     } catch (error) {

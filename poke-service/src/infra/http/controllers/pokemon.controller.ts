@@ -88,7 +88,7 @@ export class PokemonsController {
 
   @Get('find-by-trainerId')
   async findByTrainerId(@Query('trainerId') trainerId: string) {
-    // console.log(id);
+    // console.log(trainerId);
     try {
       const { pokemon } = await this.findPokemonsByTrainerId.execute({
         trainerId,
