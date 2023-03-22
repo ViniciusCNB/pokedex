@@ -2,12 +2,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
-export interface LocalProps {
-  id: string;
-  name: string;
-  description: string
-}
+import { LocalProps } from "../types";
 
 const AddTrainerModal = () => {
   const { register, handleSubmit, reset } = useForm()

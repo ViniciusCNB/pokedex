@@ -2,20 +2,7 @@ import { useEffect, useState } from "react"
 import Card from "./Card"
 import PokedexMenu from "./PokedexMenu"
 import axios from "axios"
-
-export interface PokemonProps {
-  id: string
-  trainerid: string
-  localid: string
-  imageurl: string
-  name: string
-  nickname: string
-  type: string
-  gender: string
-  weight: string
-  createdat: string
-}
-
+import { PokemonProps } from "../types"
 
 const Pokedex = () => {
   const [filterText, setFilterText] = useState("")

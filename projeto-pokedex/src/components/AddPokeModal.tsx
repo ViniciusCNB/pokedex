@@ -2,28 +2,14 @@ import * as Dialog from "@radix-ui/react-dialog"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-import { LocalProps } from "./AddTrainerModal"
-
-export interface TrainerProps {
-  id: string
-  localId: string
-  name: string
-  age: number
-}
+import { TrainerProps } from "../types"
+import { trataTipo } from "../utils"
+import { LocalProps } from "../types"
 
 const AddPokeModal = () => {
   const { register, handleSubmit, reset } = useForm()
   const [locals, setLocals] = useState<LocalProps[]>([])
   const [trainers, setTrainers] = useState<TrainerProps[]>([])
-
-  const trataTipo = (res: any) => {
-    let types: string[] = []
-    res.map((type: any) => {
-      types.push(type.type.name)
-    })
-    const stringTypes = types.join(",")
-    return stringTypes
-  }
 
   const onSubmit = (data: any) => {
     try {
@@ -33,14 +19,13 @@ const AddPokeModal = () => {
       .then((response) => {
         const pokeData = {
           ...data,
-          imageurl: response["data"]["sprites"]["front_default"],
+          imageURL: response["data"]["sprites"]["front_default"],
           type: trataTipo(response["data"]["types"]),
         }
         axios
           .post("http://localhost:3000/pokemon/create", pokeData)
           .then((response) => response.data)
           .then((data) => alert(`Pokémon ${data.name} successfully created.`))
-        console.log(pokeData)
       })
     } catch (error) {
       throw new Error(`Back-end response Created Trainer error!\n${error}`)

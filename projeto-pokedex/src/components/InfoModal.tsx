@@ -3,12 +3,13 @@ import * as Tabs from "@radix-ui/react-tabs"
 import axios from "axios"
 import { Pencil, Trash } from "phosphor-react"
 import { useEffect, useState } from "react"
-import { TrainerProps } from "./AddPokeModal"
-import { LocalProps } from "./AddTrainerModal"
+import { TrainerProps } from "../types"
+import { LocalProps } from "../types"
 import ConfirmDeleteModal from "./ConfirmDeleteModal"
 import EditLocalModal from "./EditLocalModal"
-import { PokemonProps } from "./Pokedex"
-import pokebola from "../assets/pokebola.png"
+import { PokemonProps } from "../types"
+import { checkPokemon, formatDate, isWinner } from "../utils"
+import { BattleInfos, BattleProps } from "../types"
 
 interface InfoModalProps {
   pokemon: PokemonProps
@@ -48,9 +49,9 @@ const InfoModal = (props: InfoModalProps) => {
 
         <div className="grid grid-cols-2 h-[16rem]">
           <img
-            src={props.pokemon.imageurl == undefined ? pokebola : props.pokemon.imageurl}
+            src={props.pokemon.imageurl}
             alt=""
-            className="w-60 bg-slate-200/80 rounded-lg shadow-md shadow-black/25"
+            className="w-60 h-60 bg-slate-200/80 rounded-lg shadow-md shadow-black/25"
           />
 
           <Tabs.Root defaultValue="pokemon">

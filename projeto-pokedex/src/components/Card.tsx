@@ -1,6 +1,6 @@
 import { lazy, useState, Suspense } from "react"
 import * as Dialog from "@radix-ui/react-dialog"
-import { PokemonProps } from "./Pokedex"
+import { PokemonProps } from "../types"
 
 interface CardProps {
   pokemon: PokemonProps

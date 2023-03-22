@@ -1,7 +1,8 @@
 import * as Dialog from "@radix-ui/react-dialog"
 import pokebola from "../assets/pokebola.png"
-
 import { useForm } from "react-hook-form"
+import axios from "axios"
+import { TrainerProps, PokemonProps, LocalProps } from "../types"
 
 const CreateBattleModal = () => {
   const { register, handleSubmit, reset } = useForm()
