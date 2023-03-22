@@ -4,7 +4,6 @@ import { FindLocal } from '@app/use-cases/local/find-local';
 import { UpdateLocal } from '@app/use-cases/local/update-local';
 import { Body, Controller, Get, Post, Put, Query } from '@nestjs/common';
 import { CreateLocalBody } from '../dtos/create-local-body';
-import { FindLocalBody } from '../dtos/find-local-body';
 import { UpdateLocalBody } from '../dtos/update-local-body';
 import { LocalViewModel } from '../view-models/local-view-model';
 
@@ -52,6 +51,7 @@ export class LocalsController {
 
   @Get('find')
   async find(@Query('id') id: string) {
+    console.log('->', id);
     try {
       const { local } = await this.findLocal.execute({
         id,

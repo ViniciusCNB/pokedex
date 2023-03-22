@@ -4,7 +4,6 @@ import { FindAllTrainer } from '@app/use-cases/trainer/find-all-trainer';
 import { FindTrainer } from '@app/use-cases/trainer/find-trainer';
 import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { CreateTrainerBody } from '../dtos/create-trainer-body';
-import { DeleteTrainerBody } from '../dtos/delete-trainer-body';
 import { TrainerViewModel } from '../view-models/trainer-view-model';
 
 @Controller('trainer')
@@ -34,9 +33,7 @@ export class TrainerController {
   }
 
   @Delete('delete')
-  async delete(@Body() body: DeleteTrainerBody) {
-    const { id } = body;
-
+  async delete(@Query('id') id: string) {
     try {
       const response = await this.deleteTrainer.execute({ id });
 

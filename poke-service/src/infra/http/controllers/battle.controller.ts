@@ -4,7 +4,6 @@ import { FindAllBattle } from '@app/use-cases/battle/find-all-battle';
 import { FindBattle } from '@app/use-cases/battle/find-battle';
 import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { CreateBattleBody } from '../dtos/create-battle-body';
-import { DeleteBattleBody } from '../dtos/delete-battle-body';
 import { BattleViewModel } from '../view-models/battle-view-model';
 
 @Controller('battle')
@@ -44,9 +43,7 @@ export class BattleController {
   }
 
   @Delete('delete')
-  async delete(@Body() body: DeleteBattleBody) {
-    const { id } = body;
-
+  async delete(@Query('id') id: string) {
     try {
       const response = await this.deleteBattle.execute({ id });
 

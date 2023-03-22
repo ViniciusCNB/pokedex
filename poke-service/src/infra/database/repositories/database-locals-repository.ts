@@ -29,6 +29,7 @@ export class DatabaseLocalsRepository implements LocalRepository {
       this.client.release();
     }
   }
+
   async update(newLocal: Local, id: string): Promise<void> {
     const query = {
       text: DatabaseLocalMapper.toUpdate(newLocal, id),
