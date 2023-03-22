@@ -47,9 +47,9 @@ export class DatabaseBattlesRepository implements BattleRepository {
     }
   }
 
-  async find(pokemonId1: string, pokemonId2: string): Promise<Battle> {
+  async find(pokemonId: string): Promise<Battle> {
     const query = {
-      text: DatabaseBattleMapper.toFind(pokemonId1, pokemonId2),
+      text: DatabaseBattleMapper.toFind(pokemonId),
     };
 
     try {

@@ -2,10 +2,9 @@ import { CreateBattle } from '@app/use-cases/battle/create-battle';
 import { DeleteBattle } from '@app/use-cases/battle/delete-battle';
 import { FindAllBattle } from '@app/use-cases/battle/find-all-battle';
 import { FindBattle } from '@app/use-cases/battle/find-battle';
-import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { CreateBattleBody } from '../dtos/create-battle-body';
 import { DeleteBattleBody } from '../dtos/delete-battle-body';
-import { FindBattleBody } from '../dtos/find-battle-body';
 import { BattleViewModel } from '../view-models/battle-view-model';
 
 @Controller('battle')
@@ -58,13 +57,10 @@ export class BattleController {
   }
 
   @Get('find')
-  async find(@Body() body: FindBattleBody) {
-    const { pokemonId1, pokemonId2 } = body;
-
+  async find(@Query('pokemonId') pokemonId: string) {
     try {
       const { battle } = await this.findBattle.execute({
-        pokemonId1,
-        pokemonId2,
+        pokemonId,
       });
 
       return BattleViewModel.toFind(battle);
