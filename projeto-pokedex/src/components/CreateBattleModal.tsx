@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import * as Dialog from "@radix-ui/react-dialog"
 import pokebola from "../assets/pokebola.png"
 import { useForm } from "react-hook-form"
@@ -5,12 +6,69 @@ import axios from "axios"
 import { TrainerProps, PokemonProps, LocalProps } from "../types"
 
 const CreateBattleModal = () => {
-  const { register, handleSubmit, reset } = useForm()
-  const onSubmit = (data: any) => {
+  const [trainers, setTrainers] = useState<TrainerProps[]>([])
+  const [pokemons1, setPokemons1] = useState<PokemonProps[]>([])
+  const [pokemons2, setPokemons2] = useState<PokemonProps[]>([])
+  const [locals, setLocals] = useState<LocalProps[]>([])
+  const { register, handleSubmit, reset, watch } = useForm()
+
+  const onSubmit = async (data: any) => {
     console.log(data)
-    alert(`Battle successfully created.`)
-    reset()
+    if (data.trainerId1 === data.trainerId2) {
+      alert(`Battle with the same trainer! Check the provided informations.`)
+      reset()
+    } else {
+      try {
+        await axios
+          .post("http://localhost:3000/battle/create", data)
+          .then((response) => response.data)
+        alert(`Battle successfully created.`)
+      } catch (error) {
+        throw new Error(`Back-end response Created Battle error!\n${error}`)
+      } finally {
+        reset()
+      }
+    }
   }
+
+  const selectedTrainer1 = watch("trainerId1")
+  const selectedTrainer2 = watch("trainerId2")
+
+  const selectedPoke1 = watch("pokemonId1")
+  const selectedPoke2 = watch("pokemonId2")
+
+  const trainerId1 = { trainerId: selectedTrainer1 }
+  const trainerId2 = { trainerId: selectedTrainer2 }
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/trainer/find-all")
+      .then((response) => response.data)
+      .then((data) => setTrainers(data.trainers))
+  }, [])
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/pokemon/find-by-trainerId", {
+        params: trainerId1,
+      })
+      .then((response) => setPokemons1(response.data.pokemons))
+  }, [selectedTrainer1])
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/pokemon/find-by-trainerId", {
+        params: trainerId2,
+      })
+      .then((response) => setPokemons2(response.data.pokemons))
+  }, [selectedTrainer2])
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/local/find-all")
+      .then((response) => response.data)
+      .then((data) => setLocals(data.locals))
+  }, [])
 
   return (
     <div>
@@ -34,18 +92,6 @@ const CreateBattleModal = () => {
                 />
                 <div className="flex flex-col mb-5 w-60">
                   <label htmlFor="" className="font-bold text-[16px]">
-                    POKÉMON 1
-                  </label>
-                  <select
-                    {...register("pokemonId1", { required: true })}
-                    className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
-                  >
-                    <option value=""></option>
-                    <option value="poke-1-teste">Poke 1 Teste</option>
-                  </select>
-                </div>
-                <div className="flex flex-col mb-5 w-60">
-                  <label htmlFor="" className="font-bold text-[16px]">
                     TRAINER 1
                   </label>
                   <select
@@ -53,7 +99,27 @@ const CreateBattleModal = () => {
                     className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                   >
                     <option value=""></option>
-                    <option value="trainer-1-teste">Trainer 1 Teste</option>
+                    {trainers.map((trainer) => (
+                      <option key={trainer.id} value={trainer.id}>
+                        {trainer.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="flex flex-col mb-5 w-60">
+                  <label htmlFor="" className="font-bold text-[16px]">
+                    POKÉMON 1
+                  </label>
+                  <select
+                    {...register("pokemonId1", { required: true })}
+                    className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
+                  >
+                    <option value=""></option>
+                    {pokemons1.map((pokemon) => (
+                      <option key={pokemon.id} value={pokemon.id}>
+                        {pokemon.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -66,18 +132,6 @@ const CreateBattleModal = () => {
                 />
                 <div className="flex flex-col mb-5 w-60">
                   <label htmlFor="" className="font-bold text-[16px]">
-                    POKÉMON 2
-                  </label>
-                  <select
-                    {...register("pokemonId2", { required: true })}
-                    className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
-                  >
-                    <option value=""></option>
-                    <option value="poke-2-teste">Poke 2 Teste</option>
-                  </select>
-                </div>
-                <div className="flex flex-col mb-5 w-60">
-                  <label htmlFor="" className="font-bold text-[16px]">
                     TRAINER 2
                   </label>
                   <select
@@ -85,7 +139,27 @@ const CreateBattleModal = () => {
                     className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
                   >
                     <option value=""></option>
-                    <option value="trainer-2-teste">Trainer 2 Teste</option>
+                    {trainers.map((trainer) => (
+                      <option key={trainer.id} value={trainer.id}>
+                        {trainer.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="flex flex-col mb-5 w-60">
+                  <label htmlFor="" className="font-bold text-[16px]">
+                    POKÉMON 2
+                  </label>
+                  <select
+                    {...register("pokemonId2", { required: true })}
+                    className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
+                  >
+                    <option value=""></option>
+                    {pokemons2.map((pokemon) => (
+                      <option key={pokemon.id} value={pokemon.id}>
+                        {pokemon.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -99,7 +173,11 @@ const CreateBattleModal = () => {
                 className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
               >
                 <option value=""></option>
-                <option value="battle-local">Battle local Teste</option>
+                {locals.map((local) => (
+                  <option key={local.id} value={local.id}>
+                    {local.name}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="flex flex-col mb-5 w-60">
@@ -111,8 +189,8 @@ const CreateBattleModal = () => {
                 className="bg-gray-200 text-black py-3 px-4 rounded shadow-xl"
               >
                 <option value=""></option>
-                <option value="poke-winner-1">Pokémon 1</option>
-                <option value="poke-winner-2">Pokémon 2</option>
+                <option value={selectedPoke1}>Pokémon 1</option>
+                <option value={selectedPoke2}>Pokémon 2</option>
               </select>
             </div>
             <button className="bg-red-500 text-base font-bold rounded-md p-3 text-white hover:bg-red-700 shadow-md shadow-black/25 absolute right-0 -bottom-28">
