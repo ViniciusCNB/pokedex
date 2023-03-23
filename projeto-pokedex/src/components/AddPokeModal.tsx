@@ -26,6 +26,7 @@ const AddPokeModal = () => {
           .post("http://localhost:3000/pokemon/create", pokeData)
           .then((response) => response.data)
           .then((data) => alert(`Pokémon ${data.name} successfully created.`))
+          .then(() => window.location.reload())
       })
     } catch (error) {
       throw new Error(`Back-end response Created Trainer error!\n${error}`)
