@@ -2,14 +2,16 @@ import * as Dialog from "@radix-ui/react-dialog"
 import * as Tabs from "@radix-ui/react-tabs"
 import axios from "axios"
 import { Pencil, Trash } from "phosphor-react"
-import { useEffect, useState } from "react"
+import { useEffect, useState, lazy, Suspense } from "react"
 import { TrainerProps } from "../types"
 import { LocalProps } from "../types"
-import ConfirmDeleteModal from "./ConfirmDeleteModal"
 import EditLocalModal from "./EditLocalModal"
 import { PokemonProps } from "../types"
 import { checkPokemon, formatDate, isWinner } from "../utils"
 import { BattleInfos, BattleProps } from "../types"
+
+const LazyConfirmDeleteModal = lazy(() => import("./ConfirmDeleteModal"))
+const LazyEditLocalModal = lazy(() => import("./EditLocalModal"))
 
 interface InfoModalProps {
   pokemon: PokemonProps
@@ -18,26 +20,67 @@ interface InfoModalProps {
 }
 
 const InfoModal = (props: InfoModalProps) => {
+  const [open, setOpen] = useState(false)
   const [local, setLocal] = useState<LocalProps>()
   const [trainer, setTrainer] = useState<TrainerProps>()
-  const [pokemon, setPokemon] = useState<PokemonProps>()
+  const [battleInfos, setBattleInfos] = useState<BattleProps[]>()
+  const [trainerLocal, setTrainerLocal] = useState<string>("")
+
   const locId = { id: props.localId }
   const trainId = { id: props.trainerId }
+  const pokeId = { pokemonId: props.pokemon.id }
   const trainLocId = { id: trainer?.localId }
 
   useEffect(() => {
     axios
       .get("http://localhost:3000/local/find", { params: locId })
       .then((response) => setLocal(response.data))
-  }, [])
-
-  useEffect(() => {
     axios
       .get("http://localhost:3000/trainer/find", { params: trainId })
       .then((response) => setTrainer(response.data))
+    axios
+      .get("http://localhost:3000/battle/find", { params: pokeId })
+      .then((response) => response.data)
+      .then((data) => data.battles)
+      .then((battles) => setBattleInfos(battles))
   }, [])
 
-  console.log(pokemon)
+  const handleInformation = (battles: BattleProps[] | undefined) => {
+    const ret = battles?.map((battle) => {
+      const battleInfosRes: BattleInfos = {
+        id: "",
+        result: "",
+        enemyPoke: "",
+        enemyTrainer: "",
+        local: "",
+      }
+
+      battleInfosRes.id = battle.id
+      battleInfosRes.local = battle.localname
+
+      isWinner(battle, props.pokemon.id)
+        ? (battleInfosRes.result = "VICTORY")
+        : (battleInfosRes.result = "DEFEAT")
+
+      if (checkPokemon(battle, props.pokemon.id)) {
+        battleInfosRes.enemyPoke = battle.pokemonname2
+        battleInfosRes.enemyTrainer = battle.trainername2
+      } else {
+        battleInfosRes.enemyPoke = battle.pokemonname1
+        battleInfosRes.enemyTrainer = battle.trainername1
+      }
+
+      return battleInfosRes
+    })
+    return ret
+  }
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/local/find", { params: trainLocId })
+      .then((response) => setTrainerLocal(response.data.name))
+  }, [trainer?.localId])
+
   return (
     <Dialog.Portal>
       <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
@@ -85,88 +128,118 @@ const InfoModal = (props: InfoModalProps) => {
             <Tabs.Content className="grid grid-cols-2 gap-2" value="pokemon">
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">NAME</p>
-                <p className="text-sm font-semibold">
+                <p className="text-sm font-medium">
                   {props.pokemon.name.toUpperCase()}
                 </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">NICKNAME</p>
-                <p className="text-sm font-semibold">
+                <p className="text-sm font-medium">
                   {props.pokemon.nickname.toUpperCase()}
                 </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">TYPE</p>
-                <p className="text-sm font-semibold">
+                <p className="text-sm font-medium">
                   {props.pokemon.type.toUpperCase()}
                 </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">WEIGHT</p>
-                <p className="text-sm font-semibold">{props.pokemon.weight}</p>
+                <p className="text-sm font-medium">{props.pokemon.weight}</p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">GENDER</p>
-                <p className="text-sm font-semibold">
+                <p className="text-sm font-medium">
                   {props.pokemon.gender.toUpperCase()}
                 </p>
               </div>
-              <Dialog.Root>
+              <Dialog.Root open={open} onOpenChange={setOpen}>
                 <Dialog.Trigger
                   title="Delete Pokémon"
                   className="rounded-[50%] bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs absolute right-10 bottom-10 shadow-sm shadow-black/25"
                 >
                   <Trash size={17} weight="bold" />
                 </Dialog.Trigger>
-                <ConfirmDeleteModal label="POKÉMON" />
+                {open && (
+                  <Suspense>
+                    <LazyConfirmDeleteModal
+                      label="POKÉMON"
+                      url="pokemon"
+                      id={props.pokemon.id}
+                    />
+                  </Suspense>
+                )}
               </Dialog.Root>
             </Tabs.Content>
 
             <Tabs.Content className="grid grid-cols-2 gap-2" value="local">
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">NAME</p>
-                <p className="text-sm font-semibold">{local?.name}</p>
+                <p className="text-sm font-medium">
+                  {local?.name.toUpperCase()}
+                </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">CAPTURE DATE</p>
-                <p className="text-sm font-semibold">{formatDate()}</p>
+                <p className="text-sm font-medium">
+                  {formatDate(props.pokemon.createdat)}
+                </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">DESCRIPTION</p>
-                <p className="text-sm font-semibold">{local?.description}</p>
+                <p className="text-sm font-medium">
+                  {local?.description.toUpperCase()}
+                </p>
               </div>
-              <Dialog.Root>
+              <Dialog.Root open={open} onOpenChange={setOpen}>
                 <Dialog.Trigger
                   title="Edit Local"
                   className="rounded-[50%] bg-slate-600 mt-3 py-2 px-3 text-white hover:bg-slate-800 font-bold text-xs absolute right-10 bottom-10 shadow-sm shadow-black/25"
                 >
                   <Pencil size={17} weight="bold" />
                 </Dialog.Trigger>
-                <EditLocalModal />
+                {open && (
+                  <Suspense>
+                    <LazyEditLocalModal id={local?.id} />
+                  </Suspense>
+                )}
               </Dialog.Root>
             </Tabs.Content>
 
             <Tabs.Content className="grid grid-cols-2 gap-2" value="trainer">
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">NAME</p>
-                <p className="text-sm font-semibold">{trainer?.name}</p>
+                <p className="text-sm font-medium">
+                  {trainer?.name.toUpperCase()}
+                </p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">AGE</p>
-                <p className="text-sm font-semibold">{trainer?.age}</p>
+                <p className="text-sm font-medium">{trainer?.age}</p>
               </div>
               <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit">
                 <p className="text-red-500 font-extrabold">LOCAL</p>
-                <p className="text-sm font-semibold">{trainerLocal}</p>
+                <p className="text-sm font-medium">
+                  {trainerLocal.toUpperCase()}
+                </p>
               </div>
-              <Dialog.Root>
+              <Dialog.Root open={open} onOpenChange={setOpen}>
                 <Dialog.Trigger
                   title="Delete Trainer"
                   className="rounded-[50%] bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs absolute right-10 bottom-10 shadow-sm shadow-black/25"
                 >
                   <Trash size={17} weight="bold" />
                 </Dialog.Trigger>
-                <ConfirmDeleteModal label="TRAINER" />
+                {open && (
+                  <Suspense>
+                    <LazyConfirmDeleteModal
+                      label="TRAINER"
+                      url="trainer"
+                      id={trainer?.id}
+                    />
+                  </Suspense>
+                )}
               </Dialog.Root>
             </Tabs.Content>
 
@@ -174,115 +247,43 @@ const InfoModal = (props: InfoModalProps) => {
               className="grid grid-cols-1 gap-2 h-[197px] overflow-hidden scrollbar"
               value="battle"
             >
-              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit relative">
-                <p className="text-green-500 font-extrabold">VICTORY</p>
-                <p className="text-sm font-semibold">
-                  <span className="font-bold">AGAINST:</span> PIKACHU [ PIKAPIKA
-                  ]
-                </p>
-                <p className="text-sm font-semibold">
-                  <span className="font-bold">OPPONENT TRAINER:</span> BERNARDO
-                </p>
-                <p className="text-sm font-semibold">
-                  <span className="font-bold">LOCAL:</span> CITY
-                </p>
-                <Dialog.Root>
-                  <Dialog.Trigger
-                    title="Delete Battle"
-                    className="rounded-[50%] bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs absolute right-3 bottom-9 shadow-sm shadow-black/25"
-                  >
-                    <Trash size={11} weight="bold" />
-                  </Dialog.Trigger>
-                  <ConfirmDeleteModal label="BATTLE" />
-                </Dialog.Root>
-              </div>
-              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit relative">
-                <p className="text-green-500 font-extrabold">VICTORY</p>
-                <p className="text-sm font-semibold">
-                  <span className="font-bold">AGAINST:</span> BULBASAUR [
-                  BULBABULBA ]
-                </p>
-                <p className="text-sm font-semibold">
-                  <span className="font-bold">OPPONENT TRAINER:</span> VINÍCIUS
-                </p>
-                <p className="text-sm font-semibold">
-                  <span className="font-bold">LOCAL:</span> FOREST
-                </p>
-                <Dialog.Root>
-                  <Dialog.Trigger
-                    title="Delete Battle"
-                    className="rounded-[50%] bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs absolute right-3 bottom-9 shadow-sm shadow-black/25"
-                  >
-                    <Trash size={11} weight="bold" />
-                  </Dialog.Trigger>
-                  <ConfirmDeleteModal label="BATTLE" />
-                </Dialog.Root>
-              </div>
-              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit relative">
-                <p className="text-red-500 font-extrabold">DEFEAT</p>
-                <p className="text-sm font-semibold">
-                  <span className="font-bold">AGAINST:</span> CHARMANDER [
-                  CHARCHAR ]
-                </p>
-                <p className="text-sm font-semibold">
-                  <span className="font-bold">OPPONENT TRAINER:</span> BERNARDO
-                </p>
-                <p className="text-sm font-semibold">
-                  <span className="font-bold">LOCAL:</span> FOREST
-                </p>
-                <Dialog.Root>
-                  <Dialog.Trigger
-                    title="Delete Battle"
-                    className="rounded-[50%] bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs absolute right-3 bottom-9 shadow-sm shadow-black/25"
-                  >
-                    <Trash size={11} weight="bold" />
-                  </Dialog.Trigger>
-                  <ConfirmDeleteModal label="BATTLE" />
-                </Dialog.Root>
-              </div>
-              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit relative">
-                <p className="text-green-500 font-extrabold">VICTORY</p>
-                <p className="text-sm font-semibold">
-                  <span className="font-bold">AGAINST:</span> METAPOD [ METAMETA
-                  ]
-                </p>
-                <p className="text-sm font-semibold">
-                  <span className="font-bold">OPPONENT TRAINER:</span> VINÍCIUS
-                </p>
-                <p className="text-sm font-semibold">
-                  <span className="font-bold">LOCAL:</span> CITY
-                </p>
-                <Dialog.Root>
-                  <Dialog.Trigger
-                    title="Delete Battle"
-                    className="rounded-[50%] bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs absolute right-3 bottom-9 shadow-sm shadow-black/25"
-                  >
-                    <Trash size={11} weight="bold" />
-                  </Dialog.Trigger>
-                  <ConfirmDeleteModal label="BATTLE" />
-                </Dialog.Root>
-              </div>
-              <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit relative">
-                <p className="text-red-500 font-extrabold">DEFEAT</p>
-                <p className="text-sm font-semibold">
-                  <span className="font-bold">AGAINST:</span> PIDGEY [ PIPI ]
-                </p>
-                <p className="text-sm font-semibold">
-                  <span className="font-bold">OPPONENT TRAINER:</span> BERNARDO
-                </p>
-                <p className="text-sm font-semibold">
-                  <span className="font-bold">LOCAL:</span> CITY
-                </p>
-                <Dialog.Root>
-                  <Dialog.Trigger
-                    title="Delete Battle"
-                    className="rounded-[50%] bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs absolute right-3 bottom-9 shadow-sm shadow-black/25"
-                  >
-                    <Trash size={11} weight="bold" />
-                  </Dialog.Trigger>
-                  <ConfirmDeleteModal label="BATTLE" />
-                </Dialog.Root>
-              </div>
+              {handleInformation(battleInfos)?.map((battle) => (
+                <div className="bg-slate-200/80 rounded-lg shadow-md shadow-black/25 text-black py-2 px-4 h-fit relative">
+                  {battle.result == "VICTORY" ? (
+                    <p className="text-green-500 font-extrabold">VICTORY</p>
+                  ) : (
+                    <p className="text-red-500 font-extrabold">DEFEAT</p>
+                  )}
+                  <p className="text-sm font-semibold">
+                    <span className="font-bold">AGAINST:</span>{" "}
+                    {battle.enemyPoke}
+                  </p>
+                  <p className="text-sm font-semibold">
+                    <span className="font-bold">OPPONENT TRAINER:</span>{" "}
+                    {battle.enemyTrainer}
+                  </p>
+                  <p className="text-sm font-semibold">
+                    <span className="font-bold">LOCAL:</span> {battle.local}
+                  </p>
+                  <Dialog.Root open={open} onOpenChange={setOpen}>
+                    <Dialog.Trigger
+                      title="Delete Battle"
+                      className="rounded-[50%] bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs absolute right-3 bottom-9 shadow-sm shadow-black/25"
+                    >
+                      <Trash size={11} weight="bold" />
+                    </Dialog.Trigger>
+                    {open && (
+                      <Suspense>
+                        <LazyConfirmDeleteModal
+                          label="BATTLE"
+                          url="battle"
+                          id={battle.id}
+                        />
+                      </Suspense>
+                    )}
+                  </Dialog.Root>
+                </div>
+              ))}
             </Tabs.Content>
           </Tabs.Root>
         </div>
