@@ -1,12 +1,29 @@
 import * as Dialog from "@radix-ui/react-dialog"
+import axios from "axios"
 import { useForm } from "react-hook-form"
 
-const EditLocalModal = () => {
+interface EditLocalModalProps {
+  id?: string
+}
+
+const EditLocalModal = (props: EditLocalModalProps) => {
   const { register, handleSubmit, reset } = useForm()
   const onSubmit = (data: any) => {
-    console.log(data)
-    alert(`Local ${data["name"]} successfully edited.`)
-    reset()
+    try {
+      const editData = {
+        ...data,
+        id: props.id,
+      }
+      axios
+        .put("http://localhost:3000/local/update", editData)
+        .then((response) => response.data)
+        .then((data) => alert(`Local ${data.name} successfully edited.`))
+        .then(() => window.location.reload())
+    } catch (error) {
+      throw new Error(`Back-end response Edited Local error!\n${error}`)
+    } finally {
+      reset()
+    }
   }
 
   return (
