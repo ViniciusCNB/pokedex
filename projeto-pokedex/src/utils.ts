@@ -5,13 +5,13 @@ export const formatDate = (date: string) => {
   return str[0]
 }
 
-export const checkPokemon = (battle: BattleProps, pokeId: string) => {
-  if (battle.pokemonId1 === pokeId) return true
+export const checkPokemon = (battle?: BattleProps, pokeId?: string) => {
+  if (battle?.pokemonid1 === pokeId) return true
   else return false
 }
 
-export const isWinner = (battle: BattleProps, pokeId: string) => {
-  if (battle.pokemonId1 === pokeId) return true
+export const isWinner = (battle?: BattleProps, pokeId?: string) => {
+  if (battle?.winnerid === pokeId) return true
   else return false
 }
 

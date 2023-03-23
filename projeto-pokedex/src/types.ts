@@ -2,18 +2,26 @@
 export interface BattleProps {
   id: string
   localid: string
-  trainerId1: string
-  trainerId2: string
-  pokemonId1: string
-  pokemonId2: string
-  winnerId: string
+  trainerid1: string
+  trainerid2: string
+  pokemonid1: string
+  pokemonid2: string
+  winnerid: string
+  localname: string
+  trainername1: string
+  trainername2: string
+  pokemonname1: string
+  pokemonname2: string
+  pokemonnickname1: string
+  pokemonnickname2: string
 }
 
 export interface BattleInfos {
-  result: string
-  enemyPoke: string
-  enemyTrainer: string
-  local: string
+  id?: string
+  result?: string
+  enemyPoke?: string
+  enemyTrainer?: string
+  local?: string
 }
 
 export interface TrainerProps {
