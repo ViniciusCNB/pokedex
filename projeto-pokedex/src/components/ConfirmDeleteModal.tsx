@@ -1,11 +1,22 @@
 import * as Dialog from "@radix-ui/react-dialog"
+import axios from "axios"
 
 interface ConfirmDeleteModalProps {
   label: string
-  value?: string
+  id?: string
+  url: string
 }
 
 const ConfirmDeleteModal = (props: ConfirmDeleteModalProps) => {
+
+  const deleteId = { id: props.id }
+
+  const handleClick = async () => {
+    await axios
+      .delete(`http://localhost:3000/${props.url}/delete`, { params: deleteId })
+      .then(() => window.location.reload())
+  }
+
 
   return (
     <div>
@@ -17,14 +28,16 @@ const ConfirmDeleteModal = (props: ConfirmDeleteModalProps) => {
           </Dialog.Title>
 
           <div className="grid grid-cols-2 gap-5">
-            <button className="rounded bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs">
+            <button
+              className="rounded bg-red-500 mt-3 py-2 px-3 text-white hover:bg-red-700 font-bold text-xs"
+              onClick={handleClick}
+            >
               CONFIRM
             </button>
 
             <Dialog.Close className="rounded bg-slate-800 mt-3 py-2 px-3 text-white hover:bg-slate-600 font-bold text-xs">
               CANCEL
             </Dialog.Close>
-            
           </div>
         </Dialog.Content>
       </Dialog.Portal>
